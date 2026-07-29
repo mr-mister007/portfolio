@@ -33,7 +33,7 @@ const GitHubStats: React.FC = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch('https://api.github.com/users/aravind/repos?sort=updated&per_page=6', {
+    fetch('https://api.github.com/users/mr-mister007/repos?sort=updated&per_page=6', {
       signal: controller.signal,
     })
       .then((res) => {
