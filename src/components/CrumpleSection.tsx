@@ -448,24 +448,24 @@ const CrumpleSection: React.FC = () => {
                 <text x="400" y="383" textAnchor="middle" fill="rgba(96,165,250,0.15)" fontSize="7" fontFamily="monospace">rollback</text>
 
                 {/* ── Terminal window ── */}
-                <rect x="120" y="410" width="560" height="120" fill="color-mix(in srgb, var(--color-bg) 90%, transparent)" stroke="rgba(96,165,250,0.2)" strokeWidth="0.8" rx="4" opacity="0.9" />
+                <rect x="120" y="410" width="560" height="120" fill="color-mix(in srgb, var(--color-bg) 95%, transparent)" stroke="var(--color-border)" strokeWidth="0.8" rx="4" />
                 {/* Title bar */}
-                <rect x="120" y="410" width="560" height="24" fill="rgba(96,165,250,0.04)" rx="4" />
-                <circle cx="136" cy="422" r="3.5" fill="rgba(255,100,100,0.5)" />
-                <circle cx="150" cy="422" r="3.5" fill="rgba(255,200,50,0.5)" />
-                <circle cx="164" cy="422" r="3.5" fill="rgba(100,200,100,0.5)" />
-                <text x="400" y="425" textAnchor="middle" fill="rgba(96,165,250,0.25)" fontSize="7" fontFamily="monospace">
+                <rect x="120" y="410" width="560" height="24" fill="color-mix(in srgb, var(--color-surface) 80%, transparent)" rx="4" />
+                <circle cx="136" cy="422" r="3.5" fill="rgba(255,100,100,0.6)" />
+                <circle cx="150" cy="422" r="3.5" fill="rgba(255,200,50,0.6)" />
+                <circle cx="164" cy="422" r="3.5" fill="rgba(100,200,100,0.6)" />
+                <text x="400" y="425" textAnchor="middle" fill="var(--color-text-secondary)" opacity="0.6" fontSize="7" fontFamily="monospace">
                   ~/workspace — kubectl — 80×24
                 </text>
 
                 {/* Output */}
-                <text x="140" y="455" fill="rgba(96,165,250,0.55)" fontSize="8" fontFamily="monospace">{'$ kubectl get pods -n production'}</text>
-                <text x="140" y="470" fill="rgba(96,165,250,0.3)" fontSize="7" fontFamily="monospace">{'NAME                           READY   STATUS    RESTARTS   AGE'}</text>
-                <text x="140" y="485" fill="rgba(96,165,250,0.5)" fontSize="7" fontFamily="monospace">{'api-server-7d4f8b96c6          1/1     Running   0          12d'}</text>
-                <text x="140" y="500" fill="rgba(96,165,250,0.5)" fontSize="7" fontFamily="monospace">{'web-app-9f2e1d3b4a             1/1     Running   0          12d'}</text>
-                <text x="140" y="515" fill="rgba(96,165,250,0.5)" fontSize="7" fontFamily="monospace">{'worker-3b6d1f8a2c              1/1     Running   0          11d'}</text>
-                <rect x="236" y="513" width="5" height="9" fill="#60A5FA" opacity="0.6">
-                  <animate attributeName="opacity" values="0.6;0.1;0.6" dur="1s" repeatCount="indefinite" />
+                <text x="140" y="455" fill="var(--color-text-primary)" fontSize="8" fontFamily="monospace" fontWeight="600">{'$ kubectl get pods -n production'}</text>
+                <text x="140" y="470" fill="var(--color-text-secondary)" opacity="0.7" fontSize="7" fontFamily="monospace">{'NAME                           READY   STATUS    RESTARTS   AGE'}</text>
+                <text x="140" y="485" fill="var(--color-text-primary)" opacity="0.85" fontSize="7" fontFamily="monospace">{'api-server-7d4f8b96c6          1/1     Running   0          12d'}</text>
+                <text x="140" y="500" fill="var(--color-text-primary)" opacity="0.85" fontSize="7" fontFamily="monospace">{'web-app-9f2e1d3b4a             1/1     Running   0          12d'}</text>
+                <text x="140" y="515" fill="var(--color-text-primary)" opacity="0.85" fontSize="7" fontFamily="monospace">{'worker-3b6d1f8a2c              1/1     Running   0          11d'}</text>
+                <rect x="236" y="513" width="5" height="9" fill="var(--color-accent)" opacity="0.8">
+                  <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1s" repeatCount="indefinite" />
                 </rect>
 
                 {/* ── Footer info ── */}
