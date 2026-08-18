@@ -318,11 +318,11 @@ const CrumpleSection: React.FC = () => {
           >
             {/* Paper card */}
             <div
-              className="absolute inset-0 overflow-hidden"
+              className="absolute inset-0 overflow-hidden card"
               style={{
                 borderRadius: 'inherit',
-                background: '#060D1A',
-                border: '1px solid rgba(96, 165, 250, 0.2)',
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
               }}
             >
               {/* ═══ BLUEPRINT SVG ═══ */}
@@ -448,7 +448,7 @@ const CrumpleSection: React.FC = () => {
                 <text x="400" y="383" textAnchor="middle" fill="rgba(96,165,250,0.15)" fontSize="7" fontFamily="monospace">rollback</text>
 
                 {/* ── Terminal window ── */}
-                <rect x="120" y="410" width="560" height="120" fill="rgba(0,0,0,0.35)" stroke="rgba(96,165,250,0.2)" strokeWidth="0.8" rx="4" />
+                <rect x="120" y="410" width="560" height="120" fill="color-mix(in srgb, var(--color-bg) 90%, transparent)" stroke="rgba(96,165,250,0.2)" strokeWidth="0.8" rx="4" opacity="0.9" />
                 {/* Title bar */}
                 <rect x="120" y="410" width="560" height="24" fill="rgba(96,165,250,0.04)" rx="4" />
                 <circle cx="136" cy="422" r="3.5" fill="rgba(255,100,100,0.5)" />
