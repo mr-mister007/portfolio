@@ -205,21 +205,27 @@ const InteractiveBg: React.FC = () => {
     camera.position.set(0, 3, 10);
 
     // ── Renderer ──
-    const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(w, h);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.35;
     mount.appendChild(renderer.domElement);
 
-    // ── Lights ──
-    scene.add(new THREE.AmbientLight(0x202050, 0.3));
-    const key = new THREE.DirectionalLight(0x88ccff, 0.8);
-    key.position.set(4, 6, 8);
-    scene.add(key);
-    const fill = new THREE.DirectionalLight(0x4488ff, 0.3);
-    fill.position.set(-4, 2, -6);
-    scene.add(fill);
+    // ── Realistic Studio Lighting ──
+    scene.add(new THREE.AmbientLight(0x1a2b4c, 0.45));
+
+    const keyLight = new THREE.DirectionalLight(0x93c5fd, 1.4);
+    keyLight.position.set(6, 10, 8);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0x3b82f6, 0.6);
+    fillLight.position.set(-6, -2, -4);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.PointLight(0x60a5fa, 2.2, 30);
+    rimLight.position.set(0, 5, -8);
+    scene.add(rimLight);
 
     // ── Shared geometry ──
     const dotGeo = new THREE.SphereGeometry(0.02, 6, 6);
@@ -725,9 +731,13 @@ const InteractiveBg: React.FC = () => {
     ));
 
     // ════════════════════════════════════════════════════════
-    //  8. FLOATING TECH LABEL SPRITES
+    //  8. REALISTIC INFRASTRUCTURE HUD BADGES & LABELS
     // ════════════════════════════════════════════════════════
-    const labels = ['k8s', 'docker', 'terraform', 'helm', 'CI/CD', 'devops', 'git', 'linux', 'prometheus', 'grafana', 'argo', 'istio', 'vault', 'ansible'];
+    const labels = [
+      'aws::eks-cluster', 'k8s::pod/api-v2', 'helm::release', 'terraform::apply',
+      'docker::image/prod', 'argo::cd-sync', 'istio::mesh-mtls', 'prom::metrics-99.9%',
+      'grafana::dashboard', 'vault::secrets', 'ci-cd::pipeline-pass', 'gcp::cloud-run',
+    ];
     const spriteGroup = new THREE.Group();
     scene.add(spriteGroup);
 
@@ -739,60 +749,62 @@ const InteractiveBg: React.FC = () => {
     }[] = [];
 
     function createLabelTextures(dark: boolean) {
-      // Remove old sprites
       while (spriteGroup.children.length) spriteGroup.remove(spriteGroup.children[0]);
 
-      const textColor = dark ? 'rgba(96,165,250,0.08)' : 'rgba(59,130,246,0.06)';
-      const glowColor = dark ? 'rgba(96,165,250,0.4)' : 'rgba(59,130,246,0.2)';
+      const textColor = dark ? '#60a5fa' : '#2563eb';
+      const borderCol = dark ? 'rgba(96,165,250,0.35)' : 'rgba(37,99,235,0.25)';
+      const bgCol = dark ? 'rgba(10,14,42,0.65)' : 'rgba(238,242,255,0.65)';
 
       labelSprites.length = 0;
       labels.forEach((text) => {
-        for (let i = 0; i < 2; i++) {
-          const canvas = document.createElement('canvas');
-          canvas.width = 128;
-          canvas.height = 40;
-          const ctx = canvas.getContext('2d')!;
-          ctx.clearRect(0, 0, 128, 40);
+        const canvas = document.createElement('canvas');
+        canvas.width = 180;
+        canvas.height = 40;
+        const ctx = canvas.getContext('2d')!;
+        ctx.clearRect(0, 0, 180, 40);
 
-          ctx.font = 'bold 20px monospace';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
+        // Badge pill background box
+        ctx.fillStyle = bgCol;
+        ctx.strokeStyle = borderCol;
+        ctx.lineWidth = 1.5;
+        ctx.roundRect(2, 2, 176, 36, 6);
+        ctx.fill();
+        ctx.stroke();
 
-          ctx.shadowColor = glowColor;
-          ctx.shadowBlur = 12;
-          ctx.fillStyle = textColor;
-          ctx.fillText(text, 64, 20);
+        // Terminal prompt symbol
+        ctx.font = 'bold 11px monospace';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = dark ? '#34d399' : '#059669';
+        ctx.fillText('>', 10, 20);
 
-          ctx.shadowBlur = 0;
-          ctx.fillStyle = textColor;
-          ctx.fillText(text, 64, 20);
+        // Text tag label
+        ctx.fillStyle = textColor;
+        ctx.fillText(text, 22, 20);
 
-          const texture = new THREE.CanvasTexture(canvas);
-          texture.needsUpdate = true;
-          const mat = new THREE.SpriteMaterial({
-            map: texture,
-            transparent: true,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending,
-            opacity: dark ? 0.3 + Math.random() * 0.2 : 0.15 + Math.random() * 0.1,
-          });
-          const sprite = new THREE.Sprite(mat);
-          const x = (Math.random() - 0.5) * 12;
-          const y = Math.random() * 5 - 1;
-          const z = (Math.random() - 0.5) * 12 - 3;
-          sprite.position.set(x, y, z);
-          const s = 0.3 + Math.random() * 0.3;
-          sprite.scale.set(s * 3, s, 1);
-          spriteGroup.add(sprite);
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.needsUpdate = true;
+        const mat = new THREE.SpriteMaterial({
+          map: texture,
+          transparent: true,
+          depthWrite: false,
+          opacity: dark ? 0.65 : 0.45,
+        });
+        const sprite = new THREE.Sprite(mat);
+        const x = (Math.random() - 0.5) * 14;
+        const y = Math.random() * 5 - 1;
+        const z = (Math.random() - 0.5) * 14 - 3;
+        sprite.position.set(x, y, z);
+        sprite.scale.set(0.7, 0.16, 1);
+        spriteGroup.add(sprite);
 
-          labelSprites.push({
-            sprite, x, y, z,
-            speed: 0.1 + Math.random() * 0.15,
-            phase: Math.random() * Math.PI * 2,
-            floatSpeed: 0.3 + Math.random() * 0.2,
-            opacity: (dark ? 0.15 : 0.08) + Math.random() * 0.1,
-          });
-        }
+        labelSprites.push({
+          sprite, x, y, z,
+          speed: 0.02 + Math.random() * 0.03,
+          phase: Math.random() * Math.PI * 2,
+          floatSpeed: 0.2 + Math.random() * 0.2,
+          opacity: dark ? 0.65 : 0.45,
+        });
       });
     }
     createLabelTextures(isDark());
@@ -889,15 +901,18 @@ const InteractiveBg: React.FC = () => {
 
       const autoRotateSpeed = 0.008 + scrollEnergy * 0.04;
 
-      networkGroup.rotation.y += dt * (autoRotateSpeed + absVel * 0.5);
-      hubGroup.rotation.y += dt * (autoRotateSpeed * 1.5 + absVel * 0.3);
-      arcGroup.rotation.y += dt * (autoRotateSpeed * 0.7 + absVel * 0.4);
-      metricGroup.position.x = -1.6 + Math.sin(elapsedTime * 0.02) * 0.1;
-      cicdGroup.rotation.y += dt * (autoRotateSpeed * 0.5 + absVel * 0.2);
+      networkGroup.rotation.y += dt * (autoRotateSpeed + absVel * 0.8);
+      hubGroup.rotation.y += dt * (autoRotateSpeed * 2.0 + absVel * 0.6);
+      arcGroup.rotation.y += dt * (autoRotateSpeed * 1.2 + absVel * 0.5);
+      metricGroup.position.x = -1.6 + Math.sin(elapsedTime * 0.05) * 0.2;
+      cicdGroup.rotation.y += dt * (autoRotateSpeed * 0.8 + absVel * 0.4);
 
-      const zd = 10 - scrollC * 16;
-      camera.position.set(smy * 0.3, 3 + scrollC * 1.2 + smx * 0.15, zd + smx * 0.15);
-      camera.lookAt(smy * 0.5, 1.2 + scrollC * 0.5, zd - 5);
+      // Dynamic 3D DevOps Cloud Tunnel Fly-through on Scroll
+      const camX = Math.sin(scrollC * Math.PI * 2) * 2.5 + smy * 0.4;
+      const camY = 3.5 - scrollC * 6.5 + smx * 0.25;
+      const camZ = 12.0 - scrollC * 24.0 + smx * 0.2;
+      camera.position.set(camX, camY, camZ);
+      camera.lookAt(Math.sin(scrollC * Math.PI) * 1.5, 1.0 - scrollC * 6.5, camZ - 6);
 
       const colorCycle = new THREE.Color().setHSL(hue, isDark() ? 0.5 : 0.3, isDark() ? 0.5 : 0.4);
       hubMat.color.copy(colorCycle);

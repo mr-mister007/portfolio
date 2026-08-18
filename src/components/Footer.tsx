@@ -2,9 +2,9 @@ import { FadeIn } from './FadeIn';
 import StatusBadge from './StatusBadge';
 
 const links = [
-  { label: 'GitHub', href: '#' },
-  { label: 'LinkedIn', href: '#' },
-  { label: 'Twitter', href: '#' },
+  { label: 'GitHub', href: 'https://github.com/mr-mister007' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/aravindmv03' },
+  { label: 'Email', href: 'mailto:aravind@serververse.qzz.io' },
 ];
 
 const Footer: React.FC = () => {

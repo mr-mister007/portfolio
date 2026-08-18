@@ -4,9 +4,9 @@ import SectionLabel from './SectionLabel';
 import SectionCounter from './SectionCounter';
 
 const links = [
-  { label: 'GitHub', href: '#', desc: 'github.com/aravind' },
-  { label: 'Email', href: 'mailto:hello@aravind.dev', desc: 'hello@aravind.dev' },
-  { label: 'LinkedIn', href: '#', desc: 'linkedin.com/in/aravind' },
+  { label: 'GitHub', href: 'https://github.com/mr-mister007', desc: 'github.com/mr-mister007' },
+  { label: 'Email', href: 'mailto:aravind@serververse.qzz.io', desc: 'aravind@serververse.qzz.io' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/aravindmv03', desc: 'linkedin.com/in/aravindmv03' },
 ];
 
 const ContactSection: React.FC = () => {

@@ -31,7 +31,7 @@ const COMMANDS: Record<string, (args: string[]) => string | string[]> = {
   ],
   'cat about.txt': () => [
     '── about.txt ──────────────────────',
-    'DevOps & Platform Engineer with 5+ years',
+    'DevOps & Platform Engineer with 2+ years',
     'experience designing, building, and running',
     'production infrastructure at scale.',
     '',
@@ -42,9 +42,9 @@ const COMMANDS: Record<string, (args: string[]) => string | string[]> = {
   ],
   './contact.sh': () => [
     '── contact.sh ─────────────────────',
-    'Email:    hello@aravind.dev',
-    'GitHub:   github.com/aravind',
-    'LinkedIn: linkedin.com/in/aravind',
+    'Email:    aravind@serververse.qzz.io',
+    'GitHub:   github.com/mr-mister007',
+    'LinkedIn: linkedin.com/in/aravindmv03',
     '───────────────────────────────────',
   ],
   date: () => new Date().toLocaleString('en-US', {

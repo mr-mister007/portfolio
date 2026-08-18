@@ -5,7 +5,7 @@ import SectionCounter from './SectionCounter';
 import TerminalWidget from './TerminalWidget';
 
 const stats = [
-  { value: '5+', label: 'Years in DevOps' },
+  { value: '2+', label: 'Years in DevOps' },
   { value: '100+', label: 'Pipelines Built' },
   { value: '50+', label: 'Infra Projects' },
 ];
@@ -31,7 +31,7 @@ const AboutSection: React.FC = () => {
         {/* Bio */}
         <FadeIn delay={0.2} y={16} variant="up" duration={0.6}>
           <p className="text-text-secondary text-[clamp(0.95rem,1.4vw,1.15rem)] font-light leading-relaxed max-w-2xl mb-12">
-            With over five years in DevOps and platform engineering, I design and maintain cloud infrastructure,
+            With over two years in DevOps and platform engineering, I design and maintain cloud infrastructure,
             automate deployment pipelines, and keep production systems running smoothly. I enjoy turning complex
             infrastructure problems into simple, reliable solutions.
           </p>
