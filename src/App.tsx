@@ -4,7 +4,6 @@ import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ProjectsSection from './components/ProjectsSection';
 import ServicesSection from './components/ServicesSection';
-import InfraBuilderSection from './components/InfraBuilderSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import CursorFollower from './components/CursorFollower';
@@ -73,7 +72,6 @@ const App: React.FC = () => {
           <AboutSection />
           <ProjectsSection />
           <ServicesSection />
-          <InfraBuilderSection />
           <ContactSection />
           <Footer />
         </main>
