@@ -41,7 +41,7 @@ const COMMANDS: Record<string, (args: string[]) => string | string[]> = {
   ],
   './contact.sh': () => [
     '── contact.sh ─────────────────────',
-    'Email:    aravind@serververse.qzz.io',
+    'Email:    hello@aravindmv.com',
     'GitHub:   github.com/mr-mister007',
     'LinkedIn: linkedin.com/in/aravindmv03',
     '───────────────────────────────────',

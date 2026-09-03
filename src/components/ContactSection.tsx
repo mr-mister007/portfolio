@@ -5,7 +5,7 @@ import SectionCounter from './SectionCounter';
 
 const links = [
   { label: 'GitHub', href: 'https://github.com/mr-mister007', desc: 'github.com/mr-mister007' },
-  { label: 'Email', href: 'mailto:aravind@serververse.qzz.io', desc: 'aravind@serververse.qzz.io' },
+  { label: 'Email', href: 'mailto:hello@aravindmv.com', desc: 'hello@aravindmv.com' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/aravindmv03', desc: 'linkedin.com/in/aravindmv03' },
 ];
 

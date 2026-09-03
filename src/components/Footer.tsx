@@ -4,7 +4,7 @@ import StatusBadge from './StatusBadge';
 const links = [
   { label: 'GitHub', href: 'https://github.com/mr-mister007' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/aravindmv03' },
-  { label: 'Email', href: 'mailto:aravind@serververse.qzz.io' },
+  { label: 'Email', href: 'mailto:hello@aravindmv.com' },
 ];
 
 const Footer: React.FC = () => {
