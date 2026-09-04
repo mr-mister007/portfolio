@@ -1,16 +1,16 @@
 import React, { useState, useCallback, lazy, Suspense, useEffect } from 'react';
-import Lenis from 'lenis';
+import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
+import LiveClusterSimulator from './components/LiveClusterSimulator';
 import ProjectsSection from './components/ProjectsSection';
+import AboutSection from './components/AboutSection';
 import ServicesSection from './components/ServicesSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import CursorFollower from './components/CursorFollower';
-import Navbar from './components/Navbar';
-import ScrollProgress from './components/ScrollProgress';
 import BootSequence from './components/BootSequence';
-import CrumpleSection from './components/CrumpleSection';
+import CommandPalette from './components/CommandPalette';
+import ScrollProgress from './components/ScrollProgress';
 import { ScrollProvider } from './contexts/ScrollContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -18,37 +18,24 @@ const InteractiveBg = lazy(() => import('./components/InteractiveBg'));
 
 const App: React.FC = () => {
   const [bootComplete, setBootComplete] = useState(false);
-  const [showBg, setShowBg] = useState(false);
+  const [showBg, setShowBg] = useState(true);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
   const handleBootComplete = useCallback(() => {
     setBootComplete(true);
-    window.scrollTo(0, 0);
-    setTimeout(() => setShowBg(true), 300);
   }, []);
 
-  // Initialize Lenis Smooth Scroll
+  // Global Cmd + K / Ctrl + K shortcut
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    const rafId = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
     };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
@@ -63,17 +50,26 @@ const App: React.FC = () => {
           <InteractiveBg />
         </Suspense>
       )}
+
       <CursorFollower />
       <ScrollProgress />
 
       <ScrollProvider>
-        <Navbar />
+        {/* Floating Island Dock Navigation */}
+        <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
 
+        {/* Global Command Palette */}
+        <CommandPalette
+          isOpen={commandPaletteOpen}
+          onClose={() => setCommandPaletteOpen(false)}
+        />
+
+        {/* High-Velocity Flow (Lando Norris Aesthetic for DevOps & Platform Engineering) */}
         <main className="relative z-10">
           <HeroSection />
-          <CrumpleSection />
-          <AboutSection />
+          <LiveClusterSimulator />
           <ProjectsSection />
+          <AboutSection />
           <ServicesSection />
           <ContactSection />
           <Footer />

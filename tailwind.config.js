@@ -9,19 +9,33 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'system-ui', 'sans-serif'],
-        heading: ['Kanit', 'sans-serif'],
+        heading: ['Plus Jakarta Sans', 'Inter', 'Kanit', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       colors: {
         bg: 'var(--color-bg)',
         surface: 'var(--color-surface)',
+        'surface-elevated': 'var(--color-surface-elevated)',
         'text-primary': 'var(--color-text-primary)',
         'text-secondary': 'var(--color-text-secondary)',
         border: 'var(--color-border)',
         accent: {
-          DEFAULT: '#60A5FA',
-          dark: '#3B82F6',
-          muted: 'rgba(96,165,250,0.08)',
+          DEFAULT: '#D4FF00',
+          neon: '#D4FF00',
+          volt: '#CCFF00',
+          cyan: '#00F2FE',
+          emerald: '#10B981',
+          violet: '#818CF8',
+          amber: '#F59E0B',
+          blue: '#3B82F6',
+          muted: 'rgba(212,255,0,0.08)',
+        },
+        carbon: {
+          950: '#060709',
+          900: '#0A0C10',
+          800: '#12151C',
+          700: '#1B202B',
+          600: '#2A3142',
         },
       },
       animation: {

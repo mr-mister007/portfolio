@@ -1,38 +1,26 @@
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, Command } from 'lucide-react';
+
+interface NavbarProps {
+  onOpenCommandPalette?: () => void;
+}
 
 const NAV_ITEMS = [
-  { label: 'About', href: '#about' },
   { label: 'Work', href: '#work' },
+  { label: 'Capabilities', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Contact', href: '#contact' },
 ];
 
-/**
- * Clean navbar with:
- * - Auto-hide on scroll down, show on scroll up
- * - Active section highlighting via IntersectionObserver
- * - Mobile slide-in menu with backdrop blur
- * - Dark/light theme toggle
- */
-const Navbar: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const { theme, toggle } = useTheme();
 
-  // ── Scroll shadow ──
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // ── Active section tracking ──
-  useEffect(() => {
-    const sectionIds = NAV_ITEMS.map((i) => i.href.replace('#', ''));
+    const sectionIds = ['work', 'about', 'services', 'contact'];
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
@@ -42,7 +30,7 @@ const Navbar: React.FC = () => {
         ([entry]) => {
           if (entry.isIntersecting) setActiveSection(id);
         },
-        { rootMargin: '-40% 0px -55% 0px' },
+        { rootMargin: '-30% 0px -50% 0px' }
       );
       observer.observe(el);
       observers.push(observer);
@@ -51,158 +39,135 @@ const Navbar: React.FC = () => {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
-  // ── Lock body scroll when mobile menu open ──
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
-
-  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  const scrollTo = (href: string) => {
     setMobileOpen(false);
     const id = href.replace('#', '');
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <>
-      <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12"
-        initial={{ y: 0 }}
-        style={{
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-          background: scrolled ? 'color-mix(in srgb, var(--color-bg) 80%, transparent)' : 'transparent',
-          borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
-        }}
+      <motion.header
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-3 sm:top-5 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none"
       >
-        <div className="max-w-6xl mx-auto flex items-center justify-between h-16">
-          {/* Logo */}
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="text-lg font-semibold tracking-tight text-text-primary hover:text-accent transition-colors"
-          >
-            Aravind<span className="text-accent">.</span>
-          </a>
+        <nav className="pointer-events-auto flex items-center justify-between gap-3 sm:gap-6 px-4 sm:px-6 py-2 rounded-full border border-slate-200/80 bg-white/85 dark:border-white/10 dark:bg-[#0A0E18]/85 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_12px_36px_-8px_rgba(0,0,0,0.5)] transition-all duration-300 w-full max-w-4xl">
+          {/* Logo & Availability Pill */}
+          <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="text-base sm:text-lg font-heading font-black tracking-tight text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-[#D4FF00] transition-colors flex items-center gap-1 uppercase"
+            >
+              <span>Aravind</span>
+              <span className="text-emerald-500 dark:text-[#D4FF00] font-mono">//</span>
+            </button>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-700 dark:text-[#D4FF00] dark:bg-[#D4FF00]/10 dark:border-[#D4FF00]/30 font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-[#D4FF00] animate-ping" />
+              <span>ACTIVE · SRE</span>
+            </div>
+          </div>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
               return (
-                <a
+                <button
                   key={item.label}
-                  href={item.href}
-                  onClick={(e) => scrollTo(e, item.href)}
-                  className={`text-sm transition-colors relative group ${
-                    isActive ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+                  onClick={() => scrollTo(item.href)}
+                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all ${
+                    isActive
+                      ? 'text-emerald-700 dark:text-white'
+                      : 'text-slate-600 hover:text-slate-950 hover:bg-slate-100 dark:text-white/60 dark:hover:text-white dark:hover:bg-white/5'
                   }`}
                 >
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-emerald-500/10 border border-emerald-500/30 dark:bg-[#D4FF00]/15 dark:border-[#D4FF00]/40 -z-10 shadow-[0_0_15px_rgba(16,185,129,0.15)] dark:shadow-[0_0_15px_rgba(212,255,0,0.3)]"
+                      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                    />
+                  )}
                   {item.label}
-                  <span
-                    className={`absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-300 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`}
-                  />
-                </a>
+                </button>
               );
             })}
-
-            {/* Theme toggle */}
-            <button
-              onClick={toggle}
-              className="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-accent-muted transition-all"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
           </div>
 
-          {/* Mobile: theme toggle + hamburger */}
-          <div className="flex md:hidden items-center gap-3">
+          {/* Right Controls */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onOpenCommandPalette}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 bg-slate-100/80 text-slate-700 hover:text-emerald-700 hover:border-emerald-400 dark:border-white/15 dark:bg-black/40 dark:text-white/70 dark:hover:text-[#D4FF00] dark:hover:border-[#D4FF00]/40 transition-all text-xs font-mono group"
+              title="Open Command Palette (Cmd + K)"
+            >
+              <Command className="w-3.5 h-3.5 text-emerald-600 dark:text-[#D4FF00] group-hover:scale-110 transition-transform" />
+              <span className="hidden sm:inline font-bold">COMMANDS</span>
+              <kbd className="hidden sm:inline px-1.5 py-0.5 rounded bg-slate-200/80 dark:bg-white/10 text-[10px] text-slate-600 dark:text-white/70 font-mono">
+                ⌘K
+              </kbd>
+            </button>
+
             <button
               onClick={toggle}
-              className="p-2 rounded-full text-text-secondary hover:text-text-primary transition-colors"
               aria-label="Toggle theme"
+              className="p-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-text-secondary dark:hover:text-text-primary dark:hover:bg-white/10 transition-all"
             >
-              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400 hover:rotate-45 transition-transform" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700 hover:-rotate-12 transition-transform" />
+              )}
             </button>
+
             <button
-              onClick={() => setMobileOpen(true)}
-              className="p-2 rounded-full text-text-secondary hover:text-text-primary transition-colors"
-              aria-label="Open menu"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle mobile menu"
+              className="md:hidden p-1.5 rounded-full text-slate-700 dark:text-text-secondary hover:text-slate-900 dark:hover:text-text-primary"
             >
-              <Menu size={20} />
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
-        </div>
-      </motion.nav>
+        </nav>
+      </motion.header>
 
-      {/* ── Mobile slide-in menu ── */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              className="fixed inset-0 z-[60] bg-black/40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileOpen(false)}
-            />
-
-            {/* Panel */}
-            <motion.div
-              className="fixed top-0 right-0 bottom-0 z-[70] w-72 bg-bg border-l border-border backdrop-blur-2xl flex flex-col"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-                <span className="text-sm font-semibold text-text-primary">Navigation</span>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-x-4 top-16 z-50 p-6 rounded-2xl border border-border/80 bg-white/95 dark:bg-surface/95 backdrop-blur-2xl shadow-2xl flex flex-col gap-3 md:hidden"
+          >
+            <div className="flex flex-col gap-1">
+              {NAV_ITEMS.map((item) => (
                 <button
-                  onClick={() => setMobileOpen(false)}
-                  className="p-2 rounded-full text-text-secondary hover:text-text-primary transition-colors"
-                  aria-label="Close menu"
+                  key={item.label}
+                  onClick={() => scrollTo(item.href)}
+                  className="px-4 py-2.5 rounded-xl text-sm font-medium text-left text-slate-800 dark:text-text-primary hover:bg-slate-100 dark:hover:bg-white/5"
                 >
-                  <X size={18} />
+                  {item.label}
                 </button>
-              </div>
+              ))}
+            </div>
 
-              {/* Links */}
-              <div className="flex-1 flex flex-col p-6 gap-2">
-                {NAV_ITEMS.map((item, i) => {
-                  const isActive = activeSection === item.href.replace('#', '');
-                  return (
-                    <motion.a
-                      key={item.label}
-                      href={item.href}
-                      onClick={(e) => scrollTo(e, item.href)}
-                      className={`text-lg py-3 px-4 rounded-xl transition-all ${
-                        isActive
-                          ? 'text-text-primary bg-accent-muted font-medium'
-                          : 'text-text-secondary hover:text-text-primary hover:bg-accent-muted/50'
-                      }`}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.06 }}
-                    >
-                      {item.label}
-                    </motion.a>
-                  );
-                })}
-              </div>
-
-              {/* Footer */}
-              <div className="px-6 py-4 border-t border-border">
-                <p className="text-xs text-text-secondary">Aravind<span className="text-accent">.</span></p>
-              </div>
-            </motion.div>
-          </>
+            <button
+              onClick={() => {
+                setMobileOpen(false);
+                onOpenCommandPalette?.();
+              }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:border-accent/30 dark:bg-accent/10 dark:text-accent font-mono text-xs font-semibold mt-2"
+            >
+              <Command className="w-4 h-4" /> Open Command Palette (⌘K)
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
