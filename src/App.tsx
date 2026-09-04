@@ -55,6 +55,9 @@ const App: React.FC = () => {
     <ThemeProvider>
       {!bootComplete && <BootSequence onComplete={handleBootComplete} />}
 
+      {/* Cinematic Film Grain Overlay */}
+      <div className="film-grain" />
+
       {showBg && (
         <Suspense fallback={null}>
           <InteractiveBg />

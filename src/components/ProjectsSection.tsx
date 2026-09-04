@@ -12,18 +12,24 @@ const projects = [
     title: 'Kubernetes Cluster Migration',
     description: 'Migrated 50+ microservices from a legacy data center to auto-scaling EKS clusters with zero downtime. Implemented canary deployments and automated rollback strategies.',
     tech: 'AWS · EKS · Terraform · ArgoCD',
+    link: 'https://github.com/mr-mister007',
+    linkLabel: 'Architecture Spec',
   },
   {
     number: '02',
     title: 'CI/CD Pipeline Platform',
     description: 'Built a self-serve CI/CD platform serving 15 engineering teams. Integrated security scanning, artifact management, and deployment gates with full audit trail.',
     tech: 'GitHub Actions · Docker · Helm · Prometheus',
+    link: 'https://github.com/mr-mister007',
+    linkLabel: 'Pipeline Repo',
   },
   {
     number: '03',
     title: 'Cloud Cost Optimisation',
     description: 'Reduced monthly cloud spend by 40% through right-sizing, spot instances, and automated resource scheduling. Built real-time cost dashboards with Grafana.',
     tech: 'AWS · Terraform · Python · Grafana',
+    link: 'https://github.com/mr-mister007',
+    linkLabel: 'Dashboard & IaC',
   },
 ];
 
@@ -67,7 +73,7 @@ const ProjectsSection: React.FC = () => {
                         <span className="text-xs text-text-secondary font-mono">
                           {project.tech}
                         </span>
-                        <LiveProjectButton />
+                        <LiveProjectButton href={project.link} label={project.linkLabel} />
                       </div>
                     </div>
                   </div>

@@ -1,7 +1,7 @@
 {
-  "name": "jack-portfolio",
+  "name": "aravind-devops-portfolio",
   "version": "1.0.0",
-  "description": "3D Creator portfolio landing page for Jack",
+  "description": "DevOps & Platform Engineering portfolio of Aravind — Cloud, Kubernetes, CI/CD, and IaC",
   "type": "module",
   "main": "src/main.tsx",
   "scripts": {

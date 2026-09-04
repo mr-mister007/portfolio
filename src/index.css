@@ -19,10 +19,12 @@
   --color-border: rgba(255,255,255,0.08);
 }
 
-/* Smooth theme transitions */
-*,
-*::before,
-*::after {
+/* Smooth theme transitions on key surfaces, avoiding canvas/SVG paint-thrashing */
+body,
+.card,
+.card-subtle,
+nav,
+footer {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
@@ -169,4 +171,35 @@ img {
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Shimmering Gradient Typography ── */
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #60A5FA 0%, #38BDF8 25%, #FFFFFF 50%, #38BDF8 75%, #60A5FA 100%);
+  background-size: 200% auto;
+  animation: shimmer-sweep 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Subtle Film Grain Overlay ── */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }

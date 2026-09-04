@@ -12,6 +12,9 @@ const CursorFollower: React.FC = () => {
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Only initialize on fine pointer devices (desktop mouse, not touchscreens)
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
     const ring = ringRef.current;
     const dot = dotRef.current;
     if (!ring || !dot) return;
@@ -23,10 +26,27 @@ const CursorFollower: React.FC = () => {
     let dotY = y;
     let targetX = x;
     let targetY = y;
+    let isInteractive = false;
 
     const onMouse = (e: MouseEvent) => {
       targetX = e.clientX;
       targetY = e.clientY;
+    };
+
+    const onPointerOver = (e: PointerEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('a, button, [role="button"], input, textarea, select, .interactive-hover')) {
+        isInteractive = true;
+      }
+    };
+
+    const onPointerOut = (e: PointerEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('a, button, [role="button"], input, textarea, select, .interactive-hover')) {
+        isInteractive = false;
+      }
     };
 
     const animate = () => {
@@ -38,16 +58,6 @@ const CursorFollower: React.FC = () => {
 
       dot.style.transform = `translate3d(${dotX - 4}px, ${dotY - 4}px, 0)`;
       ring.style.transform = `translate3d(${x - 20}px, ${y - 20}px, 0)`;
-
-      const hovered = document.querySelector(':hover') as HTMLElement | null;
-      const isInteractive = Boolean(
-        hovered && (
-          hovered.tagName === 'A' ||
-          hovered.tagName === 'BUTTON' ||
-          hovered.getAttribute('role') === 'button' ||
-          hovered.closest('a, button, [role="button"], input, textarea, select')
-        )
-      );
 
       ring.style.width = isInteractive ? '52px' : '40px';
       ring.style.height = isInteractive ? '52px' : '40px';
@@ -63,10 +73,14 @@ const CursorFollower: React.FC = () => {
     };
 
     window.addEventListener('mousemove', onMouse, { passive: true });
+    window.addEventListener('pointerover', onPointerOver, { passive: true });
+    window.addEventListener('pointerout', onPointerOut, { passive: true });
     rafId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', onMouse);
+      window.removeEventListener('pointerover', onPointerOver);
+      window.removeEventListener('pointerout', onPointerOut);
       cancelAnimationFrame(rafId);
     };
   }, []);

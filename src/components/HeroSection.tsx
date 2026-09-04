@@ -67,7 +67,7 @@ const HeroSection: React.FC = () => {
           style={{ perspective: 1000 }}
         >
           <span className="text-text-primary">Hi, I&apos;m </span>
-          <span className="text-accent">Aravind</span>
+          <span className="text-shimmer font-black">Aravind</span>
         </motion.h1>
 
         <motion.p
