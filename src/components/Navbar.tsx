@@ -1,172 +1,186 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
-import { Sun, Moon, Menu, X, Command } from 'lucide-react';
+import Monogram from './Monogram';
+import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
-  onOpenCommandPalette?: () => void;
+  onOpenPalette: () => void;
 }
 
 const NAV_ITEMS = [
-  { label: 'Work', href: '#work' },
-  { label: 'Capabilities', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Contact', href: '#contact' },
+  { num: '01', label: 'Work', href: '#work' },
+  { num: '02', label: 'Services', href: '#services' },
+  { num: '03', label: 'Manifesto', href: '#about' },
+  { num: '04', label: 'Dispatch', href: '#contact' },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenPalette }) => {
+  const { theme, toggleTheme, accent, cycleAccent } = useTheme();
+  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
-  const { theme, toggle } = useTheme();
 
   useEffect(() => {
-    const sectionIds = ['work', 'about', 'services', 'contact'];
-    const observers: IntersectionObserver[] = [];
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: '-30% 0px -50% 0px' }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
-    setMobileOpen(false);
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const accentColorMap = {
+    blue: '#2f5bff',
+    lime: '#d4ff00',
+    orange: '#ff5a1f',
   };
 
   return (
     <>
-      <motion.header
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-3 sm:top-5 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none"
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          scrolled
+            ? 'bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--border)] py-3'
+            : 'bg-transparent py-4 sm:py-6'
+        }`}
       >
-        <nav className="pointer-events-auto flex items-center justify-between gap-3 sm:gap-6 px-4 sm:px-6 py-2 rounded-full border border-slate-200/80 bg-white/85 dark:border-white/10 dark:bg-[#0A0E18]/85 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_12px_36px_-8px_rgba(0,0,0,0.5)] transition-all duration-300 w-full max-w-4xl">
-          {/* Logo & Availability Pill */}
-          <div className="flex items-center gap-3 shrink-0">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-base sm:text-lg font-heading font-black tracking-tight text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-[#D4FF00] transition-colors flex items-center gap-1 uppercase"
-            >
-              <span>Aravind</span>
-              <span className="text-emerald-500 dark:text-[#D4FF00] font-mono">//</span>
-            </button>
-
-            <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-700 dark:text-[#D4FF00] dark:bg-[#D4FF00]/10 dark:border-[#D4FF00]/30 font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-[#D4FF00] animate-ping" />
-              <span>ACTIVE · SRE</span>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between gap-4">
+          {/* Brand with Monogram */}
+          <a
+            href="/"
+            className="flex items-center gap-3 group text-[var(--ink)] no-underline select-none"
+            aria-label="Aravind — Home"
+          >
+            <div className="w-8 h-6 flex items-center justify-center transition-transform group-hover:scale-105">
+              <Monogram className="w-full h-full text-[var(--ink)]" />
             </div>
-          </div>
+            <div className="flex flex-col text-left">
+              <span className="font-sans font-bold text-sm tracking-tight leading-none text-[var(--ink)]">
+                Aravind
+              </span>
+              <span className="font-mono text-[10px] tracking-wider uppercase text-[var(--ink-secondary)] hidden sm:inline">
+                / Systems &amp; AI
+              </span>
+            </div>
+          </a>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-1">
-            {NAV_ITEMS.map((item) => {
-              const isActive = activeSection === item.href.replace('#', '');
-              return (
-                <button
-                  key={item.label}
-                  onClick={() => scrollTo(item.href)}
-                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all ${
-                    isActive
-                      ? 'text-emerald-700 dark:text-white'
-                      : 'text-slate-600 hover:text-slate-950 hover:bg-slate-100 dark:text-white/60 dark:hover:text-white dark:hover:bg-white/5'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full bg-emerald-500/10 border border-emerald-500/30 dark:bg-[#D4FF00]/15 dark:border-[#D4FF00]/40 -z-10 shadow-[0_0_15px_rgba(16,185,129,0.15)] dark:shadow-[0_0_15px_rgba(212,255,0,0.3)]"
-                      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                  {item.label}
-                </button>
-              );
-            })}
-          </div>
+          {/* Desktop Numbered Nav Links */}
+          <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group flex items-center gap-1.5 text-xs text-[var(--ink-secondary)] hover:text-[var(--ink)] transition-colors no-underline font-medium"
+              >
+                <span className="font-mono text-[10px] text-[var(--ink-secondary)]/60 group-hover:text-[var(--accent)] transition-colors">
+                  {item.num}
+                </span>
+                <span className="font-sans tracking-tight">{item.label}</span>
+              </a>
+            ))}
+          </nav>
 
-          {/* Right Controls */}
-          <div className="flex items-center gap-2">
+          {/* Toolbar Tools */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Theme Toggle Button */}
             <button
-              onClick={onOpenCommandPalette}
-              className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 bg-slate-100/80 text-slate-700 hover:text-emerald-700 hover:border-emerald-400 dark:border-white/15 dark:bg-black/40 dark:text-white/70 dark:hover:text-[#D4FF00] dark:hover:border-[#D4FF00]/40 transition-all text-xs font-mono group"
-              title="Open Command Palette (Cmd + K)"
-            >
-              <Command className="w-3.5 h-3.5 text-emerald-600 dark:text-[#D4FF00] group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline font-bold">COMMANDS</span>
-              <kbd className="hidden sm:inline px-1.5 py-0.5 rounded bg-slate-200/80 dark:bg-white/10 text-[10px] text-slate-600 dark:text-white/70 font-mono">
-                ⌘K
-              </kbd>
-            </button>
-
-            <button
-              onClick={toggle}
+              onClick={toggleTheme}
+              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-raised)] text-[var(--ink)] hover:border-[var(--accent)] transition-colors cursor-pointer"
               aria-label="Toggle theme"
-              className="p-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-text-secondary dark:hover:text-text-primary dark:hover:bg-white/10 transition-all"
+              title="Toggle Light / Dark mode"
             >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400 hover:rotate-45 transition-transform" />
-              ) : (
-                <Moon className="w-4 h-4 text-slate-700 hover:-rotate-12 transition-transform" />
-              )}
+              {theme === 'dark' ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </button>
 
+            {/* Accent Swatch Cycler */}
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle mobile menu"
-              className="md:hidden p-1.5 rounded-full text-slate-700 dark:text-text-secondary hover:text-slate-900 dark:hover:text-text-primary"
+              onClick={cycleAccent}
+              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-raised)] hover:border-[var(--accent)] transition-colors cursor-pointer"
+              aria-label="Change accent colour"
+              title={`Cycle Accent color (Current: ${accent})`}
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <span
+                className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all"
+                style={{ backgroundColor: accentColorMap[accent] }}
+              />
+            </button>
+
+            {/* Command Palette KBD Tool */}
+            <button
+              onClick={onOpenPalette}
+              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 h-8 sm:h-9 rounded-full border border-[var(--border)] bg-[var(--bg-raised)] text-[var(--ink-secondary)] hover:text-[var(--ink)] hover:border-[var(--accent)] text-xs font-mono transition-colors cursor-pointer"
+              aria-label="Open command palette"
+              title="Command Palette (⌘K)"
+            >
+              <span className="text-[10px] font-bold">⌘K</span>
+            </button>
+
+            {/* Header CTA Button */}
+            <a href="#contact" className="hidden lg:inline-flex btn text-xs py-2 px-4">
+              <span>Let&apos;s talk</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileOpen((prev) => !prev)}
+              className="md:hidden w-8 h-8 flex items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-raised)] text-[var(--ink)]"
+              aria-label="Open Menu"
+            >
+              {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
-        </nav>
-      </motion.header>
+        </div>
+      </header>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-30 bg-[var(--bg)]/98 backdrop-blur-xl md:hidden pt-24 px-6 flex flex-col justify-between pb-8"
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-4 top-16 z-50 p-6 rounded-2xl border border-border/80 bg-white/95 dark:bg-surface/95 backdrop-blur-2xl shadow-2xl flex flex-col gap-3 md:hidden"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
           >
-            <div className="flex flex-col gap-1">
+            <div className="space-y-6">
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--ink-secondary)] block mb-4">
+                [ NAVIGATION ]
+              </span>
               {NAV_ITEMS.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => scrollTo(item.href)}
-                  className="px-4 py-2.5 rounded-xl text-sm font-medium text-left text-slate-800 dark:text-text-primary hover:bg-slate-100 dark:hover:bg-white/5"
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-between py-3 border-b border-[var(--border)] text-lg font-sans font-bold text-[var(--ink)]"
                 >
-                  {item.label}
-                </button>
+                  <span>{item.label}</span>
+                  <span className="font-mono text-xs text-[var(--accent)]">{item.num}</span>
+                </a>
               ))}
+              <div className="pt-4">
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    onOpenPalette();
+                  }}
+                  className="w-full flex items-center justify-between p-3.5 rounded-xl border border-[var(--border)] bg-[var(--bg-raised)] text-sm font-mono text-[var(--ink)]"
+                >
+                  <span>Open Command Palette</span>
+                  <span className="text-xs px-2 py-0.5 rounded bg-[var(--ink)] text-[var(--bg)] font-bold">⌘K</span>
+                </button>
+              </div>
             </div>
 
-            <button
-              onClick={() => {
-                setMobileOpen(false);
-                onOpenCommandPalette?.();
-              }}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:border-accent/30 dark:bg-accent/10 dark:text-accent font-mono text-xs font-semibold mt-2"
-            >
-              <Command className="w-4 h-4" /> Open Command Palette (⌘K)
-            </button>
+            <div className="pt-8">
+              <a
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                className="w-full btn py-3 text-sm flex items-center justify-center gap-2"
+              >
+                <span>Let&apos;s talk</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

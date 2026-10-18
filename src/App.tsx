@@ -1,14 +1,12 @@
 import React, { useState, useCallback, lazy, Suspense, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
-import LiveClusterSimulator from './components/LiveClusterSimulator';
 import ProjectsSection from './components/ProjectsSection';
-import AboutSection from './components/AboutSection';
 import ServicesSection from './components/ServicesSection';
+import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import CursorFollower from './components/CursorFollower';
-import BootSequence from './components/BootSequence';
+import Preloader from './components/Preloader';
 import CommandPalette from './components/CommandPalette';
 import ScrollProgress from './components/ScrollProgress';
 import { ScrollProvider } from './contexts/ScrollContext';
@@ -16,9 +14,8 @@ import { ThemeProvider } from './contexts/ThemeContext';
 
 const InteractiveBg = lazy(() => import('./components/InteractiveBg'));
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   const [bootComplete, setBootComplete] = useState(false);
-  const [showBg, setShowBg] = useState(true);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
   const handleBootComplete = useCallback(() => {
@@ -40,41 +37,44 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider>
-      {!bootComplete && <BootSequence onComplete={handleBootComplete} />}
+      <div className="frame min-h-screen">
+        {/* Preloader Plotting Screen */}
+        {!bootComplete && <Preloader onComplete={handleBootComplete} />}
 
-      {/* Cinematic Film Grain Overlay */}
-      <div className="film-grain" />
+        {/* Viewport Architectural Framing Lines */}
+        <div className="frame-lines" aria-hidden="true">
+          <div className="frame-line-left" />
+          <div className="frame-line-right" />
+        </div>
 
-      {showBg && (
+        {/* Interactive 3D Topographic Terrain Mesh */}
         <Suspense fallback={null}>
           <InteractiveBg />
         </Suspense>
-      )}
 
-      <CursorFollower />
-      <ScrollProgress />
+        <ScrollProgress />
 
-      <ScrollProvider>
-        {/* Floating Island Dock Navigation */}
-        <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
+        <ScrollProvider>
+          {/* Architectural Header */}
+          <Navbar onOpenPalette={() => setCommandPaletteOpen(true)} />
 
-        {/* Global Command Palette */}
-        <CommandPalette
-          isOpen={commandPaletteOpen}
-          onClose={() => setCommandPaletteOpen(false)}
-        />
+          {/* Global ⌘K Command Palette */}
+          <CommandPalette
+            isOpen={commandPaletteOpen}
+            onClose={() => setCommandPaletteOpen(false)}
+          />
 
-        {/* High-Velocity Flow (Lando Norris Aesthetic for DevOps & Platform Engineering) */}
-        <main className="relative z-10">
-          <HeroSection />
-          <LiveClusterSimulator />
-          <ProjectsSection />
-          <AboutSection />
-          <ServicesSection />
-          <ContactSection />
-          <Footer />
-        </main>
-      </ScrollProvider>
+          {/* Main Content Flow */}
+          <main id="main" className="relative z-10">
+            <HeroSection />
+            <ProjectsSection />
+            <ServicesSection />
+            <AboutSection />
+            <ContactSection />
+            <Footer />
+          </main>
+        </ScrollProvider>
+      </div>
     </ThemeProvider>
   );
 };

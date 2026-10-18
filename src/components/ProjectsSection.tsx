@@ -1,208 +1,130 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FadeIn } from './FadeIn';
-import SpotlightCard from './SpotlightCard';
-import GitHubStats from './GitHubStats';
-import {
-  ShieldCheck,
-  Zap,
-  TrendingDown,
-  ExternalLink,
-  Terminal,
-  Flag,
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 const projects = [
   {
     number: '01',
-    sector: 'SECTOR 01 // CLUSTER ORCHESTRATION',
-    title: 'Kubernetes Multi-Region Migration & Canary Mesh',
+    year: '2026',
+    sector: 'APPLIED AI & AGENTIC SYSTEMS',
+    title: 'Autonomous Multi-Agent Orchestration & RAG Platform',
     description:
-      'Engineered an enterprise zero-downtime migration of 50+ microservices from legacy on-prem servers into AWS EKS. Designed automated GitOps sync with ArgoCD and progressive canary traffic weighting with Istio.',
-    tech: ['AWS EKS', 'Terraform', 'ArgoCD', 'Istio Mesh', 'Canary Rollouts'],
-    metric: {
-      value: 'Zero Downtime',
-      label: '50+ Microservices Migrated',
-      icon: ShieldCheck,
-      color: 'text-emerald-500 dark:text-[#D4FF00]',
-    },
-    codeSnippet: [
-      '$ argocd app sync production-cluster --prune',
-      'TIMESTAMP            GROUP        KIND         NAME        STATUS',
-      '2026-09-04T10:00:12  apps         Deployment   api-mesh    Synced [OK]',
-      '2026-09-04T10:00:15  networking   Ingress      alb-ingress Synced [OK]',
-      'TELEMETRY VERIFIED: 100% traffic shifted with 0 dropped packets.',
-    ],
+      'Engineered an enterprise multi-agent pipeline with dynamic tool execution, semantic vector search, and latency-optimized streaming inference. Integrated hybrid caching and automated evaluation loops to eliminate hallucinations.',
+    metric: '-65% Inference Latency · 100k+ Queries/Day',
+    outcome: 'Sub-second response times with pgvector semantic retrieval and MCP tool integration.',
+    tech: ['Python', 'FastAPI', 'LangChain', 'pgvector', 'Docker', 'Kubernetes'],
     github: 'https://github.com/mr-mister007',
   },
   {
     number: '02',
-    sector: 'SECTOR 02 // DEVSECOPS & SUPPLY CHAIN',
-    title: 'High-Velocity Cryptographic Delivery Pipeline',
+    year: '2026',
+    sector: 'BACKEND & DISTRIBUTED SYSTEMS',
+    title: 'High-Concurrency Microservices & Event Stream Engine',
     description:
-      'Constructed a hardened CI/CD supply chain platform for 15+ squads. Integrated vulnerability screening with Trivy, container provenance signing via Cosign, and automated blue/green deployment gates.',
-    tech: ['GitHub Actions', 'Docker Buildx', 'Cosign OIDC', 'Trivy', 'Kubernetes'],
-    metric: {
-      value: '10x Faster',
-      label: 'Deploy Lead Time (4m 12s)',
-      icon: Zap,
-      color: 'text-sky-500 dark:text-[#00F2FE]',
-    },
-    codeSnippet: [
-      '$ cosign verify --key ecr-key.pub ecr.aws/prod/api:v2',
-      'Verification for ecr.aws/prod/api:v2 --',
-      '  - Cryptographic signatures validated via Sigstore OIDC [PASSED]',
-      '  - 0 Critical / 0 High CVEs detected by Trivy gate [PASSED]',
-      'PROMOTED: Image certified and pushed to production registry.',
-    ],
+      'Architected distributed asynchronous API gateways and background worker pools capable of processing 10,000+ events per second with transactional consistency, circuit breakers, and zero message loss.',
+    metric: '10k+ Req/Sec · 99.99% Availability',
+    outcome: 'Sub-15ms p99 latency with horizontal pod autoscaling and Redis cluster caching.',
+    tech: ['Node.js', 'Go', 'PostgreSQL', 'Redis', 'Apache Kafka', 'gRPC / REST'],
     github: 'https://github.com/mr-mister007',
   },
   {
     number: '03',
-    sector: 'SECTOR 03 // FINOPS & AUTONOMOUS SCALING',
-    title: 'Autonomous Cloud Bin-Packing & Spot Optimizer',
+    year: '2026',
+    sector: 'CLOUD PLATFORMS & PRODUCTION',
+    title: 'Multi-Region EKS Migration & Canary Traffic Mesh',
     description:
-      'Reduced monthly AWS infrastructure expenditure by 40% through Karpenter intelligent node bin-packing, Graviton ARM64 spot instances, and automated idle resource termination.',
-    tech: ['AWS EKS', 'Terraform', 'Karpenter', 'Python SRE', 'Grafana'],
-    metric: {
-      value: '-40% Spend',
-      label: 'Saved $140k+ Annually',
-      icon: TrendingDown,
-      color: 'text-emerald-500 dark:text-[#D4FF00]',
-    },
-    codeSnippet: [
-      '$ karpenter-optimizer status --cluster=prod-core',
-      'Provisioning Engine: Karpenter Spot + Graviton ARM64',
-      'Monthly Baseline Spend:  $25,400/mo',
-      'Optimized Active Spend:  $15,240/mo (Savings: 40.0%)',
-      'EFFICIENCY: Node bin-packing density optimized to 91.2%.',
-    ],
+      'Engineered an enterprise zero-downtime migration of 50+ microservices from legacy on-premises virtualization into AWS EKS. Built automated GitOps sync loops with ArgoCD and progressive canary traffic weighting via Istio.',
+    metric: 'Zero Downtime · 50+ Microservices Migrated',
+    outcome: '100% traffic shifted with 0 dropped packets across multi-region VPC peering.',
+    tech: ['AWS EKS', 'Terraform', 'ArgoCD', 'Istio Mesh', 'Helm'],
     github: 'https://github.com/mr-mister007',
   },
 ];
 
 export const ProjectsSection: React.FC = () => {
   return (
-    <section id="work" className="relative px-4 sm:px-6 md:px-12 py-24 max-w-6xl mx-auto">
-      <div className="text-center mb-14">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-800 dark:border-[#D4FF00]/20 dark:bg-[#D4FF00]/5 dark:text-[#D4FF00] font-mono text-xs uppercase tracking-widest mb-3 font-semibold">
-          <Flag className="w-3.5 h-3.5" />
-          <span>[ 03 // TRACK RECORD & DEPLOYMENTS ]</span>
-        </div>
-        <h2 className="text-[clamp(2.2rem,5.5vw,4.5rem)] font-black uppercase text-slate-900 dark:text-white tracking-tight leading-none mb-3">
-          Production Deployments
+    <section id="work" className="relative px-4 sm:px-6 md:px-12 py-16 sm:py-24 max-w-6xl mx-auto text-left">
+      {/* Section Divider Rule with Tag */}
+      <div className="hd-rule">
+        <span className="hd-rule__tag">[ 01 // SELECTED WORK ]</span>
+      </div>
+
+      <div className="mb-12 sm:mb-16">
+        <h2 className="display text-[var(--ink)] mb-3">
+          Selected work<span className="text-[var(--accent)]">.</span>
         </h2>
-        <p className="text-slate-600 dark:text-white/60 text-sm sm:text-base max-w-xl mx-auto font-normal">
-          Real-world cloud platform migrations, security pipelines, and autonomous infrastructure built for scale.
+        <p className="lead max-w-2xl">
+          From autonomous AI agent workflows and high-concurrency backend services to self-healing Kubernetes cloud platforms.
         </p>
       </div>
 
-      {/* Case Study Cards */}
-      <div className="space-y-8">
-        {projects.map((project, i) => {
-          const MetricIcon = project.metric.icon;
-          return (
-            <FadeIn key={project.number} delay={0.1 + i * 0.08} y={20} variant="up" duration={0.6}>
-              <SpotlightCard className="p-6 sm:p-10">
-                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
-                  {/* Left Column: Info */}
-                  <div className="flex-1 min-w-0 text-left">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-4xl sm:text-5xl font-mono font-black text-emerald-600 dark:text-[#D4FF00]">
-                        {project.number}
-                      </span>
-                      <div className="h-6 w-[1px] bg-slate-200 dark:bg-white/15" />
-                      <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-white/60 font-bold">
-                        {project.sector}
-                      </span>
-                    </div>
+      {/* Editorial Case Studies (No boxes, clean line-divided editorial rows) */}
+      <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+        {projects.map((proj, idx) => (
+          <motion.article
+            key={proj.number}
+            className="py-10 sm:py-14 flex flex-col lg:flex-row lg:items-start justify-between gap-6 sm:gap-10 group"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.45, delay: idx * 0.08 }}
+          >
+            {/* Left Meta & Index */}
+            <div className="lg:w-48 shrink-0 font-mono text-xs">
+              <div className="flex items-center gap-2 text-[var(--ink-secondary)] mb-1">
+                <span className="text-[var(--accent)] font-bold text-sm">{proj.number}</span>
+                <span>/</span>
+                <span>{proj.year}</span>
+              </div>
+              <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--ink-secondary)] block">
+                {proj.sector}
+              </span>
+            </div>
 
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black uppercase text-slate-900 dark:text-white mb-4 tracking-tight">
-                      {project.title}
-                    </h3>
+            {/* Center Content */}
+            <div className="flex-1 max-w-3xl">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-sans text-[var(--ink)] mb-3 tracking-tight group-hover:text-[var(--accent)] transition-colors duration-200">
+                {proj.title}
+              </h3>
 
-                    <p className="text-slate-600 dark:text-white/70 font-normal text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
-                      {project.description}
-                    </p>
+              <p className="text-xs sm:text-sm md:text-base text-[var(--ink-secondary)] leading-relaxed mb-5">
+                {proj.description}
+              </p>
 
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-slate-100 border border-slate-200/80 text-slate-700 dark:bg-white/5 dark:border-white/10 dark:text-white/90 hover:border-emerald-500/40 dark:hover:border-[#D4FF00]/40 transition-colors"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+              {/* Architectural telemetry impact line */}
+              <div className="py-2.5 px-3.5 mb-5 rounded bg-[var(--bg-raised)]/60 text-xs font-mono flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-l-2 border-[var(--accent)]">
+                <span className="font-bold text-[var(--ink)]">{proj.metric}</span>
+                <span className="text-[11px] text-[var(--ink-secondary)]">{proj.outcome}</span>
+              </div>
 
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-[#D4FF00] font-bold hover:underline uppercase tracking-wider"
-                    >
-                      <span>Inspect Infrastructure Blueprint</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
+              {/* Tech stack inline line */}
+              <div className="flex flex-wrap items-center gap-x-2 text-xs font-mono text-[var(--ink-secondary)]">
+                <span className="text-[10px] uppercase tracking-wider text-[var(--ink-secondary)] font-bold mr-1">
+                  STACK:
+                </span>
+                {proj.tech.map((t, tIdx) => (
+                  <span key={t} className="flex items-center gap-2">
+                    <span className="text-[var(--ink)]">{t}</span>
+                    {tIdx < proj.tech.length - 1 && <span className="text-[var(--ink-secondary)]/50">·</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-                  {/* Right Column: Metric Badge & Live Audit Snippet */}
-                  <div className="w-full lg:w-96 flex flex-col justify-between shrink-0 space-y-4">
-                    {/* Metric Box */}
-                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#0E121B] border border-slate-200/80 dark:border-white/15 flex items-center justify-between text-left shadow-sm">
-                      <div>
-                        <span className="text-3xl font-black font-mono text-slate-900 dark:text-white block tracking-tight">
-                          {project.metric.value}
-                        </span>
-                        <span className="text-xs text-slate-500 dark:text-white/50 font-mono uppercase mt-1 block">
-                          {project.metric.label}
-                        </span>
-                      </div>
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-[#D4FF00]/10 border border-emerald-500/30 dark:border-[#D4FF00]/30 flex items-center justify-center">
-                        <MetricIcon className={`w-5 h-5 ${project.metric.color}`} />
-                      </div>
-                    </div>
-
-                    {/* Terminal Audit Log */}
-                    <div className="rounded-2xl border border-slate-800 dark:border-white/10 bg-slate-950 p-4 font-mono text-xs leading-relaxed overflow-x-auto text-left shadow-inner">
-                      <div className="flex items-center justify-between text-white/50 pb-2 mb-2 border-b border-white/10">
-                        <div className="flex items-center gap-2">
-                          <Terminal className="w-3.5 h-3.5 text-emerald-400 dark:text-[#D4FF00]" />
-                          <span className="text-[11px] text-white/60">audit-trail.log</span>
-                        </div>
-                        <span className="text-[10px] text-emerald-400 dark:text-[#D4FF00] font-bold">VERIFIED</span>
-                      </div>
-                      <div className="space-y-1">
-                        {project.codeSnippet.map((line, idx) => (
-                          <div
-                            key={idx}
-                            className={
-                              line.startsWith('$')
-                                ? 'text-emerald-400 dark:text-[#D4FF00] font-bold'
-                                : line.includes('TELEMETRY') || line.includes('PROMOTED') || line.includes('EFFICIENCY')
-                                ? 'text-cyan-400 dark:text-[#00F2FE] font-bold'
-                                : 'text-white/60'
-                            }
-                          >
-                            {line}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </SpotlightCard>
-            </FadeIn>
-          );
-        })}
-      </div>
-
-      {/* GitHub Ecosystem Stats */}
-      <div className="mt-14">
-        <FadeIn delay={0.3} y={12} variant="up" duration={0.6}>
-          <GitHubStats />
-        </FadeIn>
+            {/* Right Action Link */}
+            <div className="lg:w-36 shrink-0 lg:text-right pt-2 lg:pt-0">
+              <a
+                href={proj.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[var(--ink)] hover:text-[var(--accent)] transition-colors group/link"
+              >
+                <span>Inspect code</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+              </a>
+            </div>
+          </motion.article>
+        ))}
       </div>
     </section>
   );
