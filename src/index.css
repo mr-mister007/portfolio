@@ -2,49 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Pier Gorelli Design System Tokens ── */
+/* ── Prisma Cinematic Design System Tokens ── */
 :root {
   --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Default Light Theme (Warm Paper / Blueprint) */
-  --bg: #f4f4f0;
-  --bg-raised: #ecece6;
-  --ink: #0e0e0d;
-  --ink-secondary: rgba(14, 14, 13, 0.65);
-  --border: rgba(14, 14, 13, 0.12);
-  --control-line: rgba(14, 14, 13, 0.22);
-  --card-bg: rgba(255, 255, 255, 0.7);
+  /* Default Cinematic Dark Theme (Obsidian & Bone Ivory) */
+  --bg: #070708;
+  --bg-raised: #111113;
+  --bg-card: rgba(18, 18, 20, 0.7);
+  --ink: #E1E0CC;
+  --ink-secondary: rgba(225, 224, 204, 0.72);
+  --ink-muted: rgba(225, 224, 204, 0.45);
+  --border: rgba(225, 224, 204, 0.12);
+  --control-line: rgba(225, 224, 204, 0.22);
+  --card-bg: rgba(18, 18, 20, 0.65);
 
-  /* Default Blue Accent */
-  --accent: #2f5bff;
+  /* Signature Prisma Ivory */
+  --ivory: #E1E0CC;
+  --ivory-dim: rgba(225, 224, 204, 0.8);
+  --ivory-muted: rgba(225, 224, 204, 0.55);
+
+  /* Default Electric Blue Accent */
+  --accent: #5b7cff;
   --accent-ink: #ffffff;
-  --accent-text: #2a52f0;
-  --accent-bg-subtle: rgba(47, 91, 255, 0.08);
+  --accent-text: #7b97ff;
+  --accent-bg-subtle: rgba(91, 124, 255, 0.14);
 
   /* Easings & Durations */
   --dur-1: 0.4s;
   --dur-2: 0.8s;
   --dur-3: 1.2s;
-  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-/* ── Dark Theme Overrides ── */
+/* ── Dark Theme (Deep Obsidian) ── */
 :root[data-theme='dark'],
 .dark {
-  --bg: #0b0b0c;
-  --bg-raised: #151517;
-  --ink: #f4f4f0;
-  --ink-secondary: rgba(244, 244, 240, 0.6);
-  --border: rgba(244, 244, 240, 0.1);
-  --control-line: rgba(244, 244, 240, 0.18);
-  --card-bg: rgba(21, 21, 23, 0.7);
+  --bg: #050506;
+  --bg-raised: #0e0e11;
+  --bg-card: rgba(15, 15, 18, 0.7);
+  --ink: #E1E0CC;
+  --ink-secondary: rgba(225, 224, 204, 0.7);
+  --ink-muted: rgba(225, 224, 204, 0.45);
+  --border: rgba(225, 224, 204, 0.12);
+  --control-line: rgba(225, 224, 204, 0.22);
+  --card-bg: rgba(15, 15, 18, 0.65);
 
   --accent: #5b7cff;
   --accent-ink: #ffffff;
   --accent-text: #5b7cff;
-  --accent-bg-subtle: rgba(91, 124, 255, 0.12);
+  --accent-bg-subtle: rgba(91, 124, 255, 0.14);
+}
+
+/* ── Light Theme (Warm Bone Paper) ── */
+:root[data-theme='light'],
+.light {
+  --bg: #ebe9df;
+  --bg-raised: #e0ded3;
+  --bg-card: rgba(245, 244, 238, 0.85);
+  --ink: #141413;
+  --ink-secondary: rgba(20, 20, 19, 0.72);
+  --ink-muted: rgba(20, 20, 19, 0.45);
+  --border: rgba(20, 20, 19, 0.12);
+  --control-line: rgba(20, 20, 19, 0.22);
+  --card-bg: rgba(255, 255, 255, 0.75);
+
+  --accent: #2f5bff;
+  --accent-ink: #ffffff;
+  --accent-text: #2a52f0;
+  --accent-bg-subtle: rgba(47, 91, 255, 0.08);
 }
 
 /* ── Accent Color Swatches ── */
@@ -52,20 +80,20 @@
   --accent: #c6f432;
   --accent-ink: #0e0e0d;
   --accent-text: #4f6b00;
-  --accent-bg-subtle: rgba(198, 244, 50, 0.12);
+  --accent-bg-subtle: rgba(198, 244, 50, 0.14);
 }
 :root[data-theme='dark'][data-accent='lime'] {
   --accent: #d4ff00;
   --accent-ink: #0e0e0d;
   --accent-text: #d4ff00;
-  --accent-bg-subtle: rgba(212, 255, 0, 0.12);
+  --accent-bg-subtle: rgba(212, 255, 0, 0.14);
 }
 
 :root[data-accent='orange'] {
   --accent: #ff5a1f;
   --accent-ink: #ffffff;
   --accent-text: #bb3505;
-  --accent-bg-subtle: rgba(255, 90, 31, 0.1);
+  --accent-bg-subtle: rgba(255, 90, 31, 0.12);
 }
 :root[data-theme='dark'][data-accent='orange'] {
   --accent: #ff6b35;
@@ -219,17 +247,17 @@ body {
   text-overflow: ellipsis;
 }
 
-/* ── Modernist Buttons ── */
+/* ── Modernist Buttons (Prisma Pill Style) ── */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.25rem;
+  gap: 0.65rem;
+  padding: 0.5rem 1.25rem;
   min-height: 44px;
   border-radius: 9999px;
   background: var(--ink);
-  color: var(--bg);
+  color: #070708;
   font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
@@ -241,25 +269,41 @@ body {
 }
 
 .btn:hover {
-  opacity: 0.92;
+  opacity: 0.95;
   transform: translateY(-1px);
+  gap: 0.85rem;
 }
 
 .btn--ghost {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.04);
   color: var(--ink);
   border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
 }
 
 .btn--ghost:hover {
-  background: var(--accent-bg-subtle);
-  border-color: var(--accent);
-  color: var(--accent-text);
+  background: rgba(225, 224, 204, 0.1);
+  border-color: rgba(225, 224, 204, 0.3);
+  color: #ffffff;
 }
 
 .btn--accent {
   background: var(--accent);
   color: var(--accent-ink);
+}
+
+/* ── Prisma Glassmorphic Card ── */
+.prisma-card {
+  background: rgba(18, 18, 20, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(225, 224, 204, 0.1);
+  border-radius: 1.5rem;
+  transition: all 0.3s var(--ease-out);
+}
+
+.prisma-card:hover {
+  border-color: rgba(225, 224, 204, 0.25);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
 }
 
 /* ── Monogram SVG Plotting Animation ── */
@@ -328,5 +372,10 @@ body {
 .blink-dot {
   display: inline-block;
   animation: blink-dot 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ── Film Grain Noise Overlay ── */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.7'/%3E%3C/svg%3E");
 }
 

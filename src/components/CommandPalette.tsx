@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme, Accent } from '../contexts/ThemeContext';
+import { useTheme } from '../contexts/ThemeContext';
 import {
   Search,
-  ArrowRight,
   Sun,
   Moon,
   Palette,
@@ -237,7 +236,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
           {/* Palette Dialog */}
           <motion.div
-            className="relative w-full max-w-xl bg-[var(--bg-raised)] border border-[var(--border)] rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden z-10 flex flex-col text-[var(--ink)] max-h-[82vh] sm:max-h-[520px]"
+            className="relative w-full max-w-xl bg-[#0e0e11] border border-white/15 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden z-10 flex flex-col text-[#E1E0CC] max-h-[82vh] sm:max-h-[520px]"
             initial={{ opacity: 0, scale: 0.96, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
@@ -245,8 +244,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             onKeyDown={handleNavKeys}
           >
             {/* Search Input Bar */}
-            <div className="flex items-center gap-2.5 sm:gap-3 px-4 sm:px-5 py-3 sm:py-4 border-b border-[var(--border)] bg-[var(--bg)]">
-              <Search className="w-4 h-4 text-[var(--ink-secondary)] shrink-0" />
+            <div className="flex items-center gap-2.5 sm:gap-3 px-4 sm:px-5 py-3 sm:py-4 border-b border-white/10 bg-[#070708]">
+              <Search className="w-4 h-4 text-[#E1E0CC]/50 shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -256,11 +255,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   setSelectedIndex(0);
                 }}
                 placeholder="Type a command or jump to section..."
-                className="w-full bg-transparent text-sm font-sans focus:outline-none placeholder:text-[var(--ink-secondary)]"
+                className="w-full bg-transparent text-sm font-sans focus:outline-none placeholder:text-[#E1E0CC]/40 text-[#E1E0CC]"
               />
               <button
                 onClick={onClose}
-                className="p-1 rounded-md text-[var(--ink-secondary)] hover:text-[var(--ink)] hover:bg-[var(--accent-bg-subtle)] transition-colors"
+                className="p-1 rounded-md text-[#E1E0CC]/50 hover:text-[#E1E0CC] hover:bg-white/10 transition-colors"
                 aria-label="Close"
               >
                 <X className="w-4 h-4" />
@@ -270,7 +269,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             {/* Results List */}
             <div className="max-h-[380px] overflow-y-auto p-2 space-y-1">
               {filtered.length === 0 ? (
-                <div className="py-8 text-center text-xs font-mono text-[var(--ink-secondary)]">
+                <div className="py-8 text-center text-xs font-mono text-[#E1E0CC]/50">
                   No commands match &ldquo;{query}&rdquo;
                 </div>
               ) : (
@@ -284,16 +283,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       onMouseEnter={() => setSelectedIndex(idx)}
                       className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left transition-all text-xs ${
                         isSelected
-                          ? 'bg-[var(--ink)] text-[var(--bg)]'
-                          : 'text-[var(--ink)] hover:bg-[var(--accent-bg-subtle)]'
+                          ? 'bg-[#E1E0CC] text-black'
+                          : 'text-[#E1E0CC] hover:bg-white/[0.06]'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <div
                           className={`p-1.5 rounded-lg ${
                             isSelected
-                              ? 'bg-[var(--bg)] text-[var(--ink)]'
-                              : 'bg-[var(--border)] text-[var(--ink)]'
+                              ? 'bg-black text-[#E1E0CC]'
+                              : 'bg-white/5 border border-white/10 text-[#E1E0CC]'
                           }`}
                         >
                           <Icon className="w-3.5 h-3.5" />
@@ -303,7 +302,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                           {cmd.sub && (
                             <div
                               className={`text-[11px] font-mono opacity-80 ${
-                                isSelected ? 'text-[var(--bg)]' : 'text-[var(--ink-secondary)]'
+                                isSelected ? 'text-black/80' : 'text-[#E1E0CC]/60'
                               }`}
                             >
                               {cmd.sub}
@@ -313,7 +312,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       </div>
                       <span
                         className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded ${
-                          isSelected ? 'bg-white/20 text-white' : 'text-[var(--ink-secondary)]'
+                          isSelected ? 'bg-black/20 text-black font-semibold' : 'text-[#E1E0CC]/40'
                         }`}
                       >
                         {cmd.category}
@@ -325,7 +324,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             </div>
 
             {/* Footer Navigation Help */}
-            <div className="px-5 py-2.5 bg-[var(--bg)] border-t border-[var(--border)] flex items-center justify-between text-[11px] font-mono text-[var(--ink-secondary)]">
+            <div className="px-5 py-2.5 bg-[#070708] border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-[#E1E0CC]/50">
               <div className="flex items-center gap-3">
                 <span>↑↓ Navigate</span>
                 <span>↵ Select</span>

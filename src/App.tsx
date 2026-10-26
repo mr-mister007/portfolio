@@ -37,7 +37,7 @@ export const App: React.FC = () => {
 
   return (
     <ThemeProvider>
-      <div className="frame min-h-screen">
+      <div className="frame min-h-screen bg-[#070708] text-[#E1E0CC] selection:bg-[#E1E0CC] selection:text-black">
         {/* Preloader Plotting Screen */}
         {!bootComplete && <Preloader onComplete={handleBootComplete} />}
 
@@ -45,6 +45,24 @@ export const App: React.FC = () => {
         <div className="frame-lines" aria-hidden="true">
           <div className="frame-line-left" />
           <div className="frame-line-right" />
+        </div>
+
+        {/* Global Cinematic Film Grain Texture */}
+        <div className="noise-overlay pointer-events-none fixed inset-0 opacity-[0.3] mix-blend-overlay z-30" aria-hidden="true" />
+
+        {/* Persistent Cinematic Atmospheric Background Video */}
+        <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-35"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
+          />
+          <div className="noise-overlay absolute inset-0 opacity-[0.5] mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-[#070708]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#070708_80%)]" />
         </div>
 
         {/* Interactive 3D Topographic Terrain Mesh */}
@@ -64,8 +82,8 @@ export const App: React.FC = () => {
             onClose={() => setCommandPaletteOpen(false)}
           />
 
-          {/* Main Content Flow */}
-          <main id="main" className="relative z-10">
+          {/* Main Content Flow — Continuous Cinematic Viewport Panels */}
+          <main id="main" className="relative z-10 max-w-[1520px] mx-auto px-2 sm:px-4 md:px-6 space-y-10 sm:space-y-16 md:space-y-20 pb-16 sm:pb-24">
             <HeroSection />
             <ProjectsSection />
             <ServicesSection />

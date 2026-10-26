@@ -70,8 +70,8 @@ export const InteractiveBg: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
 
       const accentRGB = getAccentRGB(accent, isDark);
-      const dotBaseColor = isDark ? '244, 244, 240' : '14, 14, 13';
-      const baseAlpha = isDark ? 0.08 : 0.06;
+      const dotBaseColor = isDark ? '225, 224, 204' : '20, 20, 19';
+      const baseAlpha = isDark ? 0.07 : 0.05;
 
       // 1. Soft, slow ambient gradient drift
       const orbX = width * 0.5 + Math.sin(time * 0.5) * (width * 0.25);

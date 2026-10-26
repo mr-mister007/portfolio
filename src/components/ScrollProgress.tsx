@@ -23,7 +23,7 @@ const ScrollProgress: React.FC = () => {
     <div className="fixed top-0 left-0 right-0 z-[60] h-[2px] pointer-events-none">
       <div
         ref={barRef}
-        className="h-full bg-accent origin-left"
+        className="h-full bg-[var(--accent)] origin-left shadow-[0_0_8px_var(--accent)]"
         style={{ transform: 'scaleX(0)' }}
       />
     </div>
