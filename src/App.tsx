@@ -57,12 +57,17 @@ export const App: React.FC = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover opacity-45"
             src="/hero-video.mp4"
           />
-          <div className="noise-overlay absolute inset-0 opacity-[0.45] mix-blend-overlay" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/75 to-[#070708]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#070708_80%)]" />
+          <div className="noise-overlay absolute inset-0 opacity-[0.4] mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-[#05080d]/80 to-[#05080d]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,#05080d_85%)]" />
+
+          {/* Island Oceanic Lagoon Ambient Radial Glows */}
+          <div className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-cyan-400/10 blur-[140px]" />
+          <div className="pointer-events-none absolute top-1/2 -left-40 w-[500px] h-[500px] rounded-full bg-teal-400/10 blur-[130px]" />
+          <div className="pointer-events-none absolute -bottom-40 right-1/4 w-[600px] h-[600px] rounded-full bg-sky-400/10 blur-[150px]" />
         </div>
 
         {/* Interactive 3D Topographic Terrain Mesh */}

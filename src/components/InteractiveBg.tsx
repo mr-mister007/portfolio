@@ -23,9 +23,9 @@ export const InteractiveBg: React.FC = () => {
     let { isDark, accent } = getThemeAndAccent();
 
     const getAccentRGB = (acc: string, dark: boolean) => {
-      if (acc === 'lime') return dark ? '212, 255, 0' : '117, 153, 0';
-      if (acc === 'orange') return dark ? '255, 107, 53' : '221, 75, 26';
-      return dark ? '91, 124, 255' : '47, 91, 255';
+      if (acc === 'emerald' || acc === 'lime') return dark ? '16, 185, 129' : '5, 150, 105';
+      if (acc === 'coral' || acc === 'orange') return dark ? '255, 107, 74' : '225, 65, 30';
+      return dark ? '0, 229, 255' : '2, 132, 199'; // Default Bioluminescent Cyan
     };
 
     let mouseX = -999;
@@ -70,8 +70,8 @@ export const InteractiveBg: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
 
       const accentRGB = getAccentRGB(accent, isDark);
-      const dotBaseColor = isDark ? '225, 224, 204' : '20, 20, 19';
-      const baseAlpha = isDark ? 0.07 : 0.05;
+      const dotBaseColor = isDark ? '210, 230, 242' : '12, 24, 34';
+      const baseAlpha = isDark ? 0.08 : 0.05;
 
       // 1. Soft, slow ambient gradient drift
       const orbX = width * 0.5 + Math.sin(time * 0.5) * (width * 0.25);

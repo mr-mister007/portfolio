@@ -39,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPalette }) => {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#070708]/85 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
+            ? 'bg-[#05080d]/85 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
             : 'bg-transparent py-4 sm:py-6'
         }`}
       >
