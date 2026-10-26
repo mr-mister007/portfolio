@@ -57,11 +57,11 @@ export const App: React.FC = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-35"
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
+            className="w-full h-full object-cover opacity-40"
+            src="/hero-video.mp4"
           />
-          <div className="noise-overlay absolute inset-0 opacity-[0.5] mix-blend-overlay" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-[#070708]" />
+          <div className="noise-overlay absolute inset-0 opacity-[0.45] mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/75 to-[#070708]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#070708_80%)]" />
         </div>
 

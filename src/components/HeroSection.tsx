@@ -4,6 +4,7 @@ import { PrismaHero } from '@/components/ui/prisma-hero';
 export const HeroSection: React.FC = () => {
   return (
     <PrismaHero
+      videoSrc="/hero-video.mp4"
       word="Systems"
       subtitle="I architect high-concurrency backends, autonomous AI agent pipelines, and production cloud infrastructure."
       ctaText="Tell me what you're building"

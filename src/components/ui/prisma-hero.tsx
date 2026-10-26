@@ -110,7 +110,7 @@ export interface PrismaHeroProps {
 const PrismaHero = ({
   word = "Systems",
   subtitle = "Backend architectures, applied AI engineering, and production cloud deployments — from first prototype to mission-critical scale.",
-  videoSrc = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4",
+  videoSrc = "/hero-video.mp4",
   ctaText = "Tell me what you're building",
   ctaHref = "#contact",
   secondaryCtaText = "See selected work",
@@ -145,10 +145,11 @@ const PrismaHero = ({
         />
 
         {/* Noise overlay */}
-        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.6] mix-blend-overlay" />
+        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.45] mix-blend-overlay" />
 
-        {/* Cinematic gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/85" />
+        {/* Cinematic gradient overlays for mountain peak depth & crisp legibility */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/60 via-black/15 to-black/90" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.55)_100%)]" />
 
         {/* Top Navbar Notch */}
         {navItems && navItems.length > 0 && (
