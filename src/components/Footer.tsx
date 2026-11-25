@@ -10,9 +10,9 @@ export const Footer: React.FC = () => {
           <div className="w-6 h-5">
             <Monogram className="w-full h-full text-[#E1E0CC]" />
           </div>
-          <span className="font-sans font-bold text-sm text-[#E1E0CC]">Aravind</span>
+          <span className="font-sans font-bold text-sm text-[#E1E0CC]">Aravind MV</span>
           <span className="font-mono text-xs text-[#E1E0CC]/50">
-            &copy; {new Date().getFullYear()} · Systems &amp; AI
+            &copy; {new Date().getFullYear()} · Software Engineer &amp; DevOps
           </span>
         </div>
 

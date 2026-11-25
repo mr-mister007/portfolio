@@ -117,14 +117,17 @@ export const ContactSection: React.FC = () => {
 
             <div>
               <span className="text-[10px] uppercase tracking-wider text-[#E1E0CC]/50 block mb-1">
-                03 // BASE &amp; RESPONSE
+                03 // BASE &amp; DIRECT LINE
               </span>
               <span className="font-bold text-[#E1E0CC] block">
-                Bangalore / Remote · 12.97° N, 77.59° E
+                Kochi, Kerala · 9.93° N, 76.27° E
               </span>
-              <span className="text-[11px] text-white/50 block mt-0.5">
-                Direct response &lt; 24h
-              </span>
+              <a
+                href="tel:+918330035029"
+                className="text-[11px] text-white/60 hover:text-white transition-colors block mt-0.5 no-underline"
+              >
+                +91 8330035029 · Response &lt; 24h
+              </a>
             </div>
           </div>
         </div>

@@ -6,51 +6,51 @@ import { WordsPullUp } from '@/components/ui/prisma-hero';
 const services = [
   {
     num: '01',
-    title: 'Applied AI & Agents',
-    tag: 'AI & LLMS',
-    description:
-      'Autonomous multi-agent orchestration, production RAG pipelines, and low-latency inference architectures.',
-    tags: ['LangChain', 'pgvector', 'MCP Tools', 'LlamaIndex'],
-  },
-  {
-    num: '02',
-    title: 'Distributed Backends',
-    tag: 'ARCHITECTURE',
-    description:
-      'High-concurrency microservice APIs, asynchronous message queues, and low-latency database architectures.',
-    tags: ['FastAPI', 'Go', 'Kafka', 'Redis', 'PostgreSQL'],
-  },
-  {
-    num: '03',
     title: 'Cloud & Kubernetes',
     tag: 'INFRASTRUCTURE',
     description:
-      'Auto-scaling AWS EKS clusters with Karpenter dynamic compute, Helm packaging, and Istio canary meshes.',
-    tags: ['AWS EKS', 'Karpenter', 'Istio', 'Docker'],
+      'Managing and scaling production workloads on Azure AKS and AWS EKS, standardizing 100+ containerized services across AWS, Azure, and GCP.',
+    tags: ['Azure AKS', 'AWS EKS', 'GCP', 'Docker', 'Helm', 'Istio'],
+  },
+  {
+    num: '02',
+    title: 'CI/CD & IaC',
+    tag: 'AUTOMATION',
+    description:
+      '100+ automated GitHub Actions pipelines, reproducible Terraform infrastructure, ArgoCD GitOps, and zero-downtime rolling and canary deployments.',
+    tags: ['GitHub Actions', 'Terraform', 'ArgoCD', 'GitOps'],
+  },
+  {
+    num: '03',
+    title: 'DevSecOps & Monitoring',
+    tag: 'RELIABILITY',
+    description:
+      'Container image vulnerability scanning, OIDC secret practices, and centralized logging, metrics, and alerting across distributed services.',
+    tags: ['Trivy', 'Cosign', 'OIDC', 'Prometheus', 'Grafana', 'OpenTelemetry'],
   },
   {
     num: '04',
-    title: 'IaC & GitOps Delivery',
-    tag: 'AUTOMATION',
+    title: 'Applied AI & Agents',
+    tag: 'AI & LLMS',
     description:
-      'Declarative Terraform infrastructure modules with automated ArgoCD continuous deployment sync loops.',
-    tags: ['Terraform', 'Terragrunt', 'ArgoCD', 'GitOps'],
+      'End-to-end AI applications integrating LLM orchestration, retrieval-augmented generation (RAG) pipelines, and MCP tool execution.',
+    tags: ['Python', 'FastAPI', 'LangChain', 'RAG', 'pgvector', 'MCP Tools'],
   },
   {
     num: '05',
-    title: 'CI/CD & Security',
-    tag: 'DEVSECOPS',
+    title: 'Backend Microservices',
+    tag: 'ARCHITECTURE',
     description:
-      'Sub-5-minute self-serve deployment pipelines with automated container vulnerability screening and image signing.',
-    tags: ['GitHub Actions', 'Trivy', 'Cosign', 'OIDC'],
+      'Low-latency REST and streaming APIs, event-driven messaging, and resilient data layers built for production cloud-native workloads.',
+    tags: ['Python', 'FastAPI', 'Go', 'PostgreSQL', 'Redis', 'Kafka'],
   },
   {
     num: '06',
-    title: 'Observability & SRE',
-    tag: 'RELIABILITY',
+    title: 'AWS Cloud Foundations',
+    tag: 'CERTIFIED',
     description:
-      'Distributed OpenTelemetry tracing, error budget monitoring, and proactive alert runbooks targeting 99.999% uptime.',
-    tags: ['Prometheus', 'Grafana', 'OpenTelemetry', 'SLO/SLI'],
+      'AWS Certified Cloud Practitioner designing secure multi-cloud architectures with EC2, S3, IAM, and automated container registries.',
+    tags: ['AWS CCP', 'EC2', 'S3', 'IAM', 'Multi-Cloud'],
   },
 ];
 

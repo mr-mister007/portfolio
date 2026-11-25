@@ -3,28 +3,28 @@ import { motion } from 'framer-motion';
 import { WordsPullUp } from '@/components/ui/prisma-hero';
 
 const stats = [
-  { value: '140+', label: 'Automated Pipelines', detail: 'GitHub Actions & ArgoCD' },
-  { value: '500+', label: 'Production Containers', detail: 'Zero-downtime microservices' },
-  { value: '99.999%', label: 'Infrastructure SLA', detail: 'Multi-region fault tolerance' },
-  { value: '-42%', label: 'Cloud Compute Spend', detail: 'Karpenter spot auto-packing' },
+  { value: '100+', label: 'Automated Pipelines', detail: 'GitHub Actions CI/CD' },
+  { value: '100+', label: 'Production Containers', detail: 'Docker & Helm across clouds' },
+  { value: '3 Clouds', label: 'Multi-Cloud Delivery', detail: 'Azure AKS, AWS & GCP' },
+  { value: 'AWS CCP', label: 'Certified Practitioner', detail: 'Amazon Web Services' },
 ];
 
 const specCategories = [
   {
-    category: '01 / AI & AGENTS',
-    tools: ['Python', 'FastAPI', 'LangChain', 'pgvector', 'MCP Tools', 'LlamaIndex'],
+    category: '01 / CLOUD & KUBERNETES',
+    tools: ['Azure (AKS)', 'AWS (EKS, EC2, S3, IAM)', 'GCP', 'Docker (100+)', 'Helm', 'Istio'],
   },
   {
-    category: '02 / BACKENDS & STREAMING',
-    tools: ['Go', 'Node.js', 'PostgreSQL', 'Redis', 'Apache Kafka', 'gRPC'],
+    category: '02 / CI/CD & IAC',
+    tools: ['GitHub Actions (100+)', 'Terraform', 'ArgoCD', 'GitOps', 'Rolling & Canary'],
   },
   {
-    category: '03 / CLOUD PLATFORMS',
-    tools: ['AWS EKS', 'Docker', 'Terraform', 'Terragrunt', 'Helm', 'Istio'],
+    category: '03 / DEVSECOPS & MONITORING',
+    tools: ['Trivy', 'Cosign', 'OIDC', 'Prometheus', 'Grafana', 'OpenTelemetry'],
   },
   {
-    category: '04 / TELEMETRY & SECURITY',
-    tools: ['ArgoCD', 'OpenTelemetry', 'Prometheus', 'Grafana', 'Trivy', 'Cosign'],
+    category: '04 / SOFTWARE & AI ENGINEERING',
+    tools: ['Python', 'FastAPI', 'Go', 'LangChain', 'RAG Pipelines', 'pgvector', 'MCP Tools', 'PostgreSQL', 'Redis', 'Kafka'],
   },
 ];
 
@@ -73,8 +73,51 @@ export const AboutSection: React.FC = () => {
         {/* Concise Thesis Banner */}
         <div className="relative z-10 p-5 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md mb-8 sm:mb-10">
           <p className="text-sm sm:text-base md:text-lg text-white/80 font-sans leading-relaxed max-w-3xl">
-            I bridge backend software engineering, applied AI, and cloud infrastructure — eliminating silos to move ideas from prototype to production scale with 99.999% reliability.
+            Software Engineer and DevOps practitioner with hands-on experience building cloud infrastructure, CI/CD automation, and production AI applications across AWS, Azure, and GCP — managing AKS clusters, zero-downtime deployments, and agentic AI workflows.
           </p>
+        </div>
+
+        {/* Work Experience & Certification */}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10">
+          <div className="lg:col-span-2 p-5 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10 mb-4">
+              <div>
+                <span className="font-mono text-[10px] tracking-widest text-[var(--accent)] font-bold uppercase block">
+                  WORK EXPERIENCE
+                </span>
+                <h3 className="text-base sm:text-lg font-sans font-semibold text-[#E1E0CC]">
+                  Software Engineer &amp; DevOps — Quanhack
+                </h3>
+              </div>
+              <span className="font-mono text-[11px] text-white/60">
+                2024 – Present · Kochi, Kerala
+              </span>
+            </div>
+            <ul className="space-y-2 text-xs sm:text-sm text-white/75 font-sans leading-relaxed list-disc pl-4">
+              <li>Managed and scaled production workloads on Azure Kubernetes Service (AKS) with zero-downtime rolling and canary deployments.</li>
+              <li>Built and maintained 100+ automated GitHub Actions CI/CD pipelines and containerized 100+ production services across AWS, Azure, and GCP.</li>
+              <li>Developed end-to-end AI applications integrating LLM orchestration, RAG pipelines, and FastAPI backend services.</li>
+              <li>Provisioned reproducible Terraform infrastructure, Trivy container scanning, and centralized Prometheus, Grafana, and OpenTelemetry monitoring.</li>
+            </ul>
+          </div>
+
+          <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex flex-col justify-between">
+            <div>
+              <span className="font-mono text-[10px] tracking-widest text-[var(--accent)] font-bold uppercase block mb-2">
+                CERTIFICATIONS
+              </span>
+              <h3 className="text-base sm:text-lg font-sans font-semibold text-[#E1E0CC] mb-1">
+                AWS Certified Cloud Practitioner
+              </h3>
+              <p className="text-xs font-mono text-white/60">
+                Amazon Web Services
+              </p>
+            </div>
+            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-[11px] font-mono text-[#E1E0CC]/80">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+              <span>VERIFIED CREDENTIAL</span>
+            </div>
+          </div>
         </div>
 
         {/* High-Impact Stat Tiles */}

@@ -55,10 +55,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPalette }) => {
             </div>
             <div className="flex flex-col text-left">
               <span className="font-sans font-bold text-sm tracking-tight leading-none text-[#E1E0CC]">
-                Aravind
+                Aravind MV
               </span>
               <span className="font-mono text-[10px] tracking-wider uppercase text-[#E1E0CC]/60 hidden sm:inline">
-                / Systems &amp; AI
+                / Software &amp; DevOps
               </span>
             </div>
           </a>

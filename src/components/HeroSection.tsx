@@ -6,7 +6,7 @@ export const HeroSection: React.FC = () => {
     <PrismaHero
       videoSrc="/hero-video.mp4"
       word="Systems"
-      subtitle="I architect high-concurrency backends, autonomous AI agent pipelines, and production cloud infrastructure."
+      subtitle="Software Engineer & DevOps building cloud infrastructure across AWS, Azure & GCP, 100+ CI/CD pipelines, and production AI applications."
       ctaText="Tell me what you're building"
       ctaHref="#contact"
       secondaryCtaText="See selected work"
@@ -14,14 +14,14 @@ export const HeroSection: React.FC = () => {
       topBadge={
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-ping" />
-          <span className="font-semibold text-white">Aravind</span>
+          <span className="font-semibold text-white">Aravind MV</span>
           <span className="text-white/40">·</span>
-          <span>Systems &amp; AI Engineer</span>
+          <span>Software Engineer &amp; DevOps</span>
           <span className="text-white/40 hidden sm:inline">·</span>
-          <span className="text-white/60 hidden sm:inline font-mono">Bangalore / Remote</span>
+          <span className="text-white/60 hidden sm:inline font-mono">Kochi, Kerala</span>
         </div>
       }
-      footnote="* 99.999% SLA · Distributed backends · Applied AI"
+      footnote="* Azure AKS & AWS · 100+ CI/CD Pipelines · Applied AI"
       navItems={[
         { label: "01 // WORK", href: "#work" },
         { label: "02 // SERVICES", href: "#services" },
