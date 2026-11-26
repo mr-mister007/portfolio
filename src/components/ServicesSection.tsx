@@ -1,134 +1,116 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { WordsPullUp } from '@/components/ui/prisma-hero';
 
-const services = [
+const disciplines = [
   {
     num: '01',
     title: 'Cloud & Kubernetes',
-    tag: 'INFRASTRUCTURE',
-    description:
-      'Managing and scaling production workloads on Azure AKS and AWS EKS, standardizing 100+ containerized services across AWS, Azure, and GCP.',
-    tags: ['Azure AKS', 'AWS EKS', 'GCP', 'Docker', 'Helm', 'Istio'],
+    summary: 'Multi-cloud AKS and EKS infrastructure, Docker containerization, Helm charts, and Istio service mesh across AWS, Azure & GCP.',
+    stack: 'Azure AKS · AWS EKS · GCP · Docker · Helm · Istio',
   },
   {
     num: '02',
-    title: 'CI/CD & IaC',
-    tag: 'AUTOMATION',
-    description:
-      '100+ automated GitHub Actions pipelines, reproducible Terraform infrastructure, ArgoCD GitOps, and zero-downtime rolling and canary deployments.',
-    tags: ['GitHub Actions', 'Terraform', 'ArgoCD', 'GitOps'],
+    title: 'CI/CD & GitOps',
+    summary: '100+ automated GitHub Actions workflows, declarative Terraform infrastructure, ArgoCD deployments, and canary release strategies.',
+    stack: 'GitHub Actions · Terraform · ArgoCD · Canary Rollouts',
   },
   {
     num: '03',
-    title: 'DevSecOps & Monitoring',
-    tag: 'RELIABILITY',
-    description:
-      'Container image vulnerability scanning, OIDC secret practices, and centralized logging, metrics, and alerting across distributed services.',
-    tags: ['Trivy', 'Cosign', 'OIDC', 'Prometheus', 'Grafana', 'OpenTelemetry'],
+    title: 'DevSecOps & Observability',
+    summary: 'Continuous vulnerability scanning with Trivy, secure OIDC authentication, and monitoring with Prometheus, Grafana, and OpenTelemetry.',
+    stack: 'Trivy · Cosign · OIDC · Prometheus · Grafana · OpenTelemetry',
   },
   {
     num: '04',
     title: 'Applied AI & Agents',
-    tag: 'AI & LLMS',
-    description:
-      'End-to-end AI applications integrating LLM orchestration, retrieval-augmented generation (RAG) pipelines, and MCP tool execution.',
-    tags: ['Python', 'FastAPI', 'LangChain', 'RAG', 'pgvector', 'MCP Tools'],
+    summary: 'End-to-end AI applications using LangChain, pgvector embeddings, retrieval-augmented generation (RAG), and Model Context Protocol (MCP).',
+    stack: 'Python · FastAPI · LangChain · RAG · pgvector · MCP',
   },
   {
     num: '05',
     title: 'Backend Microservices',
-    tag: 'ARCHITECTURE',
-    description:
-      'Low-latency REST and streaming APIs, event-driven messaging, and resilient data layers built for production cloud-native workloads.',
-    tags: ['Python', 'FastAPI', 'Go', 'PostgreSQL', 'Redis', 'Kafka'],
+    summary: 'High-concurrency asynchronous services, event-driven streaming, and low-latency API layers designed for high availability.',
+    stack: 'FastAPI · Go · PostgreSQL · Redis · Apache Kafka',
   },
   {
     num: '06',
     title: 'AWS Cloud Foundations',
-    tag: 'CERTIFIED',
-    description:
-      'AWS Certified Cloud Practitioner designing secure multi-cloud architectures with EC2, S3, IAM, and automated container registries.',
-    tags: ['AWS CCP', 'EC2', 'S3', 'IAM', 'Multi-Cloud'],
+    summary: 'AWS Certified Cloud Practitioner architecting scalable EC2, S3, IAM security policies, and automated multi-cloud topologies.',
+    stack: 'AWS CCP · EC2 · S3 · IAM · VPC · Multi-Cloud',
   },
 ];
 
 export const ServicesSection: React.FC = () => {
   return (
-    <section id="services" className="relative w-full">
-      {/* Expansive Framed Panel */}
-      <div className="relative w-full overflow-hidden rounded-2xl md:rounded-[2.5rem] border border-white/10 shadow-2xl bg-black/60 backdrop-blur-xl p-5 sm:p-8 md:p-12 lg:p-14">
-        {/* Film grain noise overlay */}
-        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.5] mix-blend-overlay" />
-
-        {/* Ambient lighting gradients */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80" />
-        <div className="pointer-events-none absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-[var(--accent)]/10 blur-3xl" />
-
-        {/* Top Architectural Notch */}
-        <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2">
-          <div className="flex items-center gap-2 rounded-b-2xl md:rounded-b-3xl bg-black/90 backdrop-blur-md border-b border-x border-white/10 px-4 py-1.5 sm:px-7 sm:py-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#E1E0CC]/80 shadow-lg">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
-            02 // DISCIPLINES &amp; CAPABILITIES
-          </div>
-        </div>
-
-        {/* Section Header with Monumental WordsPullUp Typography */}
-        <div className="relative z-10 pt-4 sm:pt-6 mb-8 sm:mb-12">
-          <h2
-            className="font-medium leading-[0.88] tracking-[-0.05em] text-[clamp(2.5rem,7.5vw,5.5rem)] select-none text-[#E1E0CC]"
-          >
-            <WordsPullUp text="Capabilities" showAsterisk />
+    <section id="services" className="relative w-full scroll-mt-28">
+      {/* Minimal Header */}
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-6 border-b border-[var(--border)] mb-2">
+        <div>
+          <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent)] block mb-1.5">
+            02 / Capabilities
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+            Engineering Disciplines
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-white/75 max-w-2xl font-sans leading-relaxed mt-2 sm:mt-3">
-            Core engineering pillars across AI systems, distributed backends, and cloud platforms.
-          </p>
+        </div>
+        <span className="text-xs font-mono text-[var(--ink-muted)]">
+          Core Pillars
+        </span>
+      </div>
+
+      {/* Minimal 2-Column Editorial Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
+        {/* Column 1 */}
+        <div className="divide-y divide-[var(--border)]">
+          {disciplines.slice(0, 3).map((item, idx) => (
+            <motion.div
+              key={item.num}
+              className="py-7 sm:py-8 group"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: idx * 0.04 }}
+            >
+              <div className="flex items-center gap-3 text-xs font-mono mb-2 text-[var(--ink-muted)]">
+                <span className="text-[var(--accent)] font-semibold">{item.num}</span>
+                <span>/</span>
+                <span className="text-[var(--ink)] font-sans font-medium text-base group-hover:text-[var(--accent)] transition-colors">
+                  {item.title}
+                </span>
+              </div>
+              <p className="text-sm text-[var(--ink-secondary)] leading-relaxed font-sans mb-3">
+                {item.summary}
+              </p>
+              <div className="text-xs font-mono text-[var(--ink-muted)]">
+                {item.stack}
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Crisp Grid of Discipline Cards */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {services.map((svc, idx) => (
+        {/* Column 2 */}
+        <div className="divide-y divide-[var(--border)] md:pl-12">
+          {disciplines.slice(3, 6).map((item, idx) => (
             <motion.div
-              key={svc.num}
-              className="relative p-6 sm:p-7 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex flex-col justify-between group hover:border-white/25 hover:bg-white/[0.06] transition-all overflow-hidden"
-              initial={{ opacity: 0, y: 16 }}
+              key={item.num}
+              className="py-7 sm:py-8 group"
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.4, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: (idx + 3) * 0.04 }}
             >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="inline-block px-2.5 py-0.5 rounded-full border border-white/10 bg-white/[0.03] text-[10px] font-mono uppercase tracking-widest text-[#E1E0CC]/80">
-                    {svc.tag}
-                  </span>
-                  <span className="font-mono text-xs font-bold text-[var(--accent)]">
-                    {svc.num}
-                  </span>
-                </div>
-
-                <h3 className="font-sans font-semibold text-lg sm:text-xl text-[#E1E0CC] mb-2 tracking-tight group-hover:text-white transition-colors">
-                  {svc.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans mb-5">
-                  {svc.description}
-                </p>
+              <div className="flex items-center gap-3 text-xs font-mono mb-2 text-[var(--ink-muted)]">
+                <span className="text-[var(--accent)] font-semibold">{item.num}</span>
+                <span>/</span>
+                <span className="text-[var(--ink)] font-sans font-medium text-base group-hover:text-[var(--accent)] transition-colors">
+                  {item.title}
+                </span>
               </div>
-
-              {/* Stack Chips & Explore Trigger */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-2">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {svc.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2 py-0.5 rounded text-[10px] font-mono text-white/60 bg-white/[0.03]"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <ArrowUpRight className="w-3.5 h-3.5 text-white/40 group-hover:text-[var(--accent)] transition-colors shrink-0" />
+              <p className="text-sm text-[var(--ink-secondary)] leading-relaxed font-sans mb-3">
+                {item.summary}
+              </p>
+              <div className="text-xs font-mono text-[var(--ink-muted)]">
+                {item.stack}
               </div>
             </motion.div>
           ))}

@@ -40,59 +40,93 @@
 /* ── Dark Theme (Island Midnight Abyssal) ── */
 :root[data-theme='dark'],
 .dark {
-  --bg: #04070a;
-  --bg-raised: #081018;
-  --bg-card: rgba(8, 16, 26, 0.72);
+  --bg: #05080d;
+  --bg-raised: #0b111a;
+  --bg-card: #0b111a;
   --ink: #E2E6DC;
   --ink-secondary: rgba(226, 230, 220, 0.72);
   --ink-muted: rgba(226, 230, 220, 0.45);
-  --border: rgba(147, 197, 253, 0.12);
-  --control-line: rgba(56, 189, 248, 0.22);
-  --card-bg: rgba(8, 16, 26, 0.65);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --control-line: rgba(255, 255, 255, 0.15);
+  --card-bg: #05080d;
 
   --accent: #00e5ff;
-  --accent-ink: #04070a;
+  --accent-ink: #05080d;
   --accent-text: #38bdf8;
   --accent-bg-subtle: rgba(0, 229, 255, 0.12);
 }
 
-/* ── Light Theme (Coastal Morning Pearl & Sea Glass) ── */
+/* ── Light Theme (Clean Minimal Editorial Pearl) ── */
 :root[data-theme='light'],
 .light {
-  --bg: #e6ebed;
-  --bg-raised: #d9e2e6;
-  --bg-card: rgba(240, 246, 248, 0.88);
-  --ink: #0c1822;
-  --ink-secondary: rgba(12, 24, 34, 0.74);
-  --ink-muted: rgba(12, 24, 34, 0.48);
-  --border: rgba(12, 24, 34, 0.12);
-  --control-line: rgba(2, 132, 199, 0.25);
-  --card-bg: rgba(255, 255, 255, 0.8);
+  --bg: #f9fafb;
+  --bg-raised: #ffffff;
+  --bg-card: #ffffff;
+  --ink: #111827;
+  --ink-secondary: #4b5563;
+  --ink-muted: #9ca3af;
+  --border: rgba(17, 24, 39, 0.1);
+  --border-subtle: rgba(17, 24, 39, 0.05);
+  --control-line: rgba(17, 24, 39, 0.15);
+  --card-bg: #ffffff;
 
-  --accent: #0284c7;
+  --accent: #2563eb;
   --accent-ink: #ffffff;
-  --accent-text: #0369a1;
-  --accent-bg-subtle: rgba(2, 132, 199, 0.1);
+  --accent-text: #1d4ed8;
+  --accent-bg-subtle: rgba(37, 99, 235, 0.08);
 }
 
 /* ── Accent Color Swatches ── */
+:root[data-accent='blue'],
 :root[data-accent='cyan'] {
   --accent: #00e5ff;
   --accent-ink: #05080d;
   --accent-text: #38bdf8;
   --accent-bg-subtle: rgba(0, 229, 255, 0.14);
 }
+:root[data-theme='light'][data-accent='blue'],
+:root[data-theme='light'][data-accent='cyan'],
+.light[data-accent='blue'],
+.light[data-accent='cyan'] {
+  --accent: #2563eb;
+  --accent-ink: #ffffff;
+  --accent-text: #1d4ed8;
+  --accent-bg-subtle: rgba(37, 99, 235, 0.1);
+}
+
+:root[data-accent='lime'],
 :root[data-accent='emerald'] {
   --accent: #10b981;
   --accent-ink: #05080d;
   --accent-text: #34d399;
   --accent-bg-subtle: rgba(16, 185, 129, 0.14);
 }
+:root[data-theme='light'][data-accent='lime'],
+:root[data-theme='light'][data-accent='emerald'],
+.light[data-accent='lime'],
+.light[data-accent='emerald'] {
+  --accent: #059669;
+  --accent-ink: #ffffff;
+  --accent-text: #047857;
+  --accent-bg-subtle: rgba(5, 150, 105, 0.1);
+}
+
+:root[data-accent='orange'],
 :root[data-accent='coral'] {
   --accent: #ff6b4a;
   --accent-ink: #ffffff;
   --accent-text: #ff8a6f;
   --accent-bg-subtle: rgba(255, 107, 74, 0.14);
+}
+:root[data-theme='light'][data-accent='orange'],
+:root[data-theme='light'][data-accent='coral'],
+.light[data-accent='orange'],
+.light[data-accent='coral'] {
+  --accent: #ea580c;
+  --accent-ink: #ffffff;
+  --accent-text: #c2410c;
+  --accent-bg-subtle: rgba(234, 88, 12, 0.1);
 }
 
 /* ── Base Styles ── */

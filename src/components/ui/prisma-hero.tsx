@@ -86,12 +86,7 @@ export interface NavItem {
   href: string;
 }
 
-const defaultNavItems: (string | NavItem)[] = [
-  { label: "01 // Work", href: "#work" },
-  { label: "02 // Services", href: "#services" },
-  { label: "03 // Manifesto", href: "#about" },
-  { label: "04 // Dispatch", href: "#contact" },
-];
+const defaultNavItems: (string | NavItem)[] = [];
 
 export interface PrismaHeroProps {
   word?: string;
@@ -131,8 +126,8 @@ const PrismaHero = ({
   };
 
   return (
-    <section className={`relative h-[92vh] sm:h-screen min-h-[620px] max-h-[1080px] w-full pt-16 sm:pt-20 pb-2 sm:pb-4 ${className}`}>
-      <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2.5rem] border border-white/10 shadow-2xl bg-black">
+    <section className={`relative h-[84vh] sm:h-[88vh] min-h-[580px] max-h-[960px] w-full pb-2 ${className}`}>
+      <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-3xl border border-[var(--border)] shadow-xl bg-black">
 
         {/* Background video */}
         <video

@@ -22,12 +22,7 @@ export const HeroSection: React.FC = () => {
         </div>
       }
       footnote="* Azure AKS & AWS · 100+ CI/CD Pipelines · Applied AI"
-      navItems={[
-        { label: "01 // WORK", href: "#work" },
-        { label: "02 // SERVICES", href: "#services" },
-        { label: "03 // MANIFESTO", href: "#about" },
-        { label: "04 // DISPATCH", href: "#contact" },
-      ]}
+      navItems={[]}
     />
   );
 };

@@ -1,178 +1,105 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { WordsPullUp } from '@/components/ui/prisma-hero';
 
 const stats = [
-  { value: '100+', label: 'Automated Pipelines', detail: 'GitHub Actions CI/CD' },
-  { value: '100+', label: 'Production Containers', detail: 'Docker & Helm across clouds' },
-  { value: '3 Clouds', label: 'Multi-Cloud Delivery', detail: 'Azure AKS, AWS & GCP' },
-  { value: 'AWS CCP', label: 'Certified Practitioner', detail: 'Amazon Web Services' },
+  { value: '100+', label: 'CI/CD Pipelines' },
+  { value: '100+', label: 'Containers Deployed' },
+  { value: '3 Clouds', label: 'AWS, Azure & GCP' },
+  { value: 'AWS CCP', label: 'Certified Practitioner' },
 ];
 
-const specCategories = [
-  {
-    category: '01 / CLOUD & KUBERNETES',
-    tools: ['Azure (AKS)', 'AWS (EKS, EC2, S3, IAM)', 'GCP', 'Docker (100+)', 'Helm', 'Istio'],
-  },
-  {
-    category: '02 / CI/CD & IAC',
-    tools: ['GitHub Actions (100+)', 'Terraform', 'ArgoCD', 'GitOps', 'Rolling & Canary'],
-  },
-  {
-    category: '03 / DEVSECOPS & MONITORING',
-    tools: ['Trivy', 'Cosign', 'OIDC', 'Prometheus', 'Grafana', 'OpenTelemetry'],
-  },
-  {
-    category: '04 / SOFTWARE & AI ENGINEERING',
-    tools: ['Python', 'FastAPI', 'Go', 'LangChain', 'RAG Pipelines', 'pgvector', 'MCP Tools', 'PostgreSQL', 'Redis', 'Kafka'],
-  },
+const skills = [
+  { group: 'Cloud & Kubernetes', list: 'Azure AKS, AWS EKS, GCP, Docker, Helm, Istio' },
+  { group: 'CI/CD & GitOps', list: 'GitHub Actions, Terraform, ArgoCD, Canary & Rolling Rollouts' },
+  { group: 'DevSecOps & Observability', list: 'Trivy, Cosign, OIDC, Prometheus, Grafana, OpenTelemetry' },
+  { group: 'Software & AI Engineering', list: 'Python, FastAPI, Go, LangChain, pgvector, MCP Tools, PostgreSQL, Redis' },
 ];
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="relative w-full">
-      {/* Expansive Framed Panel */}
-      <div className="relative w-full overflow-hidden rounded-2xl md:rounded-[2.5rem] border border-white/10 shadow-2xl bg-black/60 backdrop-blur-xl p-5 sm:p-8 md:p-12 lg:p-14">
-        {/* Film grain noise overlay */}
-        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.5] mix-blend-overlay" />
-
-        {/* Ambient lighting gradients */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80" />
-        <div className="pointer-events-none absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[var(--accent)]/10 blur-3xl" />
-
-        {/* Top Architectural Notch */}
-        <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2">
-          <div className="flex items-center gap-2 rounded-b-2xl md:rounded-b-3xl bg-black/90 backdrop-blur-md border-b border-x border-white/10 px-4 py-1.5 sm:px-7 sm:py-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#E1E0CC]/80 shadow-lg">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
-            03 // PHILOSOPHY &amp; RECORD
-          </div>
-        </div>
-
-        {/* Section Header with Monumental WordsPullUp Typography */}
-        <div className="relative z-10 pt-4 sm:pt-6 mb-8 sm:mb-12">
-          <h2
-            className="font-medium leading-[0.88] tracking-[-0.05em] text-[clamp(2.5rem,7.5vw,5.5rem)] select-none text-[#E1E0CC]"
-          >
-            <WordsPullUp text="Manifesto" showAsterisk />
+    <section id="about" className="relative w-full scroll-mt-28">
+      {/* Minimal Header */}
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-6 border-b border-[var(--border)] mb-8">
+        <div>
+          <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent)] block mb-1.5">
+            03 / Background
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+            Experience &amp; Philosophy
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-white/75 max-w-2xl font-sans leading-relaxed mt-2 sm:mt-3">
-            Architectural discipline engineered for intelligent systems, high-velocity backends, and self-healing scale.
-          </p>
         </div>
+        <span className="text-xs font-mono text-[var(--ink-muted)]">
+          Track Record
+        </span>
+      </div>
 
-        {/* Monumental Dual Statement */}
-        <div className="relative z-10 mb-8 sm:mb-10 space-y-2">
-          <div className="font-medium leading-[0.9] tracking-[-0.05em] text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-[#E1E0CC]">
-            <WordsPullUp text="Build what needs to exist." />
-          </div>
-          <div className="font-medium leading-[0.9] tracking-[-0.05em] text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-[#E1E0CC]/40">
-            <WordsPullUp text="Deploy what refuses to break." />
-          </div>
-        </div>
+      {/* Editorial Narrative */}
+      <div className="max-w-3xl mb-12">
+        <p className="text-base sm:text-lg text-[var(--ink-secondary)] leading-relaxed font-sans mb-6">
+          Software Engineer and DevOps practitioner focused on building cloud infrastructure, CI/CD automation, and production AI applications across AWS, Azure, and GCP. Specializing in zero-downtime AKS operations, automated developer platforms, and agentic LLM workflows.
+        </p>
 
-        {/* Concise Thesis Banner */}
-        <div className="relative z-10 p-5 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md mb-8 sm:mb-10">
-          <p className="text-sm sm:text-base md:text-lg text-white/80 font-sans leading-relaxed max-w-3xl">
-            Software Engineer and DevOps practitioner with hands-on experience building cloud infrastructure, CI/CD automation, and production AI applications across AWS, Azure, and GCP — managing AKS clusters, zero-downtime deployments, and agentic AI workflows.
-          </p>
-        </div>
-
-        {/* Work Experience & Certification */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10">
-          <div className="lg:col-span-2 p-5 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10 mb-4">
-              <div>
-                <span className="font-mono text-[10px] tracking-widest text-[var(--accent)] font-bold uppercase block">
-                  WORK EXPERIENCE
-                </span>
-                <h3 className="text-base sm:text-lg font-sans font-semibold text-[#E1E0CC]">
-                  Software Engineer &amp; DevOps — Quanhack
-                </h3>
-              </div>
-              <span className="font-mono text-[11px] text-white/60">
-                2024 – Present · Kochi, Kerala
-              </span>
-            </div>
-            <ul className="space-y-2 text-xs sm:text-sm text-white/75 font-sans leading-relaxed list-disc pl-4">
-              <li>Managed and scaled production workloads on Azure Kubernetes Service (AKS) with zero-downtime rolling and canary deployments.</li>
-              <li>Built and maintained 100+ automated GitHub Actions CI/CD pipelines and containerized 100+ production services across AWS, Azure, and GCP.</li>
-              <li>Developed end-to-end AI applications integrating LLM orchestration, RAG pipelines, and FastAPI backend services.</li>
-              <li>Provisioned reproducible Terraform infrastructure, Trivy container scanning, and centralized Prometheus, Grafana, and OpenTelemetry monitoring.</li>
-            </ul>
-          </div>
-
-          <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md flex flex-col justify-between">
-            <div>
-              <span className="font-mono text-[10px] tracking-widest text-[var(--accent)] font-bold uppercase block mb-2">
-                CERTIFICATIONS
-              </span>
-              <h3 className="text-base sm:text-lg font-sans font-semibold text-[#E1E0CC] mb-1">
-                AWS Certified Cloud Practitioner
-              </h3>
-              <p className="text-xs font-mono text-white/60">
-                Amazon Web Services
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-[11px] font-mono text-[#E1E0CC]/80">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-              <span>VERIFIED CREDENTIAL</span>
-            </div>
-          </div>
-        </div>
-
-        {/* High-Impact Stat Tiles */}
-        <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-8 sm:mb-10">
+        {/* Minimal Understated Metrics */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-[var(--border)]">
           {stats.map((s, idx) => (
             <motion.div
               key={idx}
-              className="p-4 sm:p-5 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md"
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.06 }}
+              transition={{ duration: 0.3, delay: idx * 0.05 }}
             >
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold font-mono text-[#E1E0CC] block leading-none mb-1.5">
+              <div className="text-xl sm:text-2xl font-mono font-semibold text-[var(--ink)]">
                 {s.value}
-              </span>
-              <span className="text-[11px] font-bold font-mono text-[var(--accent)] uppercase block mb-0.5">
+              </div>
+              <div className="text-xs font-mono text-[var(--ink-muted)] mt-0.5">
                 {s.label}
-              </span>
-              <span className="text-[10px] font-mono text-white/50 block">
-                {s.detail}
-              </span>
+              </div>
             </motion.div>
           ))}
         </div>
+      </div>
 
-        {/* Toolchain Specifications */}
-        <div className="relative z-10 p-5 sm:p-7 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-5 text-xs font-mono text-white/70">
-            <span className="uppercase tracking-widest font-semibold text-[#E1E0CC] flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-              Verified Production Stack
+      {/* Work Experience Timeline */}
+      <div className="pt-10 border-t border-[var(--border)] mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-4">
+          <div>
+            <h3 className="text-base sm:text-lg font-medium text-[var(--ink)]">
+              Software Engineer &amp; DevOps — Quanhack
+            </h3>
+            <span className="text-xs font-mono text-[var(--accent)]">
+              Production Workloads &amp; Platform Engineering
             </span>
-            <span className="text-[11px] text-white/40">rev. 2026</span>
           </div>
+          <span className="text-xs font-mono text-[var(--ink-muted)]">
+            2024 – Present · Kochi, Kerala
+          </span>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {specCategories.map((spec, idx) => (
-              <div key={idx} className="space-y-1.5">
-                <span className="font-mono text-[10px] tracking-widest text-[var(--accent)] font-bold uppercase block">
-                  {spec.category}
-                </span>
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {spec.tools.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 rounded-md text-xs font-mono text-[#E1E0CC]/85 bg-white/[0.04] border border-white/5"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+        <ul className="space-y-2 text-sm text-[var(--ink-secondary)] font-sans leading-relaxed list-disc pl-4 max-w-3xl">
+          <li>Managed and scaled production workloads on Azure Kubernetes Service (AKS) with zero-downtime rolling and canary deployments.</li>
+          <li>Built and maintained 100+ automated GitHub Actions CI/CD pipelines and containerized 100+ production services across AWS, Azure, and GCP.</li>
+          <li>Developed end-to-end AI applications integrating LLM orchestration, RAG pipelines, and FastAPI backend microservices.</li>
+          <li>Provisioned reproducible Terraform infrastructure, Trivy container security scanning, and centralized Prometheus, Grafana, and OpenTelemetry monitoring.</li>
+        </ul>
+      </div>
+
+      {/* Verified Stack List */}
+      <div className="pt-10 border-t border-[var(--border)]">
+        <div className="text-xs font-mono uppercase tracking-widest text-[var(--accent)] mb-4">
+          Production Toolchain
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 text-sm">
+          {skills.map((sk, idx) => (
+            <div key={idx} className="space-y-1">
+              <span className="text-xs font-mono text-[var(--ink)] font-semibold block">
+                {sk.group}
+              </span>
+              <p className="text-xs font-mono text-[var(--ink-muted)] leading-relaxed">
+                {sk.list}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
